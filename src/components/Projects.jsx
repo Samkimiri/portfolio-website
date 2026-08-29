@@ -11,8 +11,13 @@ const grid = {
 };
 
 const card = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] } },
+  hidden: { opacity: 0, y: 24, filter: "blur(10px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] },
+  },
 };
 
 export default function Projects() {
