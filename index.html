@@ -4,17 +4,53 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio showcasing websites and web apps I've built." />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <title>Sam Kimiri — Fullstack Software Engineer</title>
+    <meta
+      name="description"
+      content="Samuel Ndung'u Kimiri (Sam) is a fullstack software engineer in Nairobi, Kenya, building fintech, marketplace, and AI-driven products for the East African market."
+    />
+    <meta name="author" content="Samuel Ndung'u Kimiri" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sam Kimiri — Fullstack Software Engineer" />
+    <meta
+      property="og:description"
+      content="Fullstack software engineer in Nairobi, Kenya, building fintech, marketplace, and AI-driven products for the East African market."
+    />
+    <meta property="og:image" content="/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sam Kimiri — Fullstack Software Engineer" />
+    <meta
+      name="twitter:description"
+      content="Fullstack software engineer in Nairobi, Kenya, building fintech, marketplace, and AI-driven products for the East African market."
+    />
+    <meta name="twitter:image" content="/og-image.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Your Name — Web Developer Portfolio</title>
+
+    <script>
+      // Applied before paint to avoid a flash of the wrong theme.
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.classList.toggle("dark", dark);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
