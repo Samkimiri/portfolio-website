@@ -3,6 +3,9 @@ export interface SocialLinks {
   linkedin: string;
   email: string;
   phone?: string;
+  // Digits only, with country code, no "+" or spaces (e.g. "254712345678") —
+  // used to build a wa.me chat link.
+  whatsapp?: string;
 }
 
 export interface Profile {

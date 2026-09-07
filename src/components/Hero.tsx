@@ -1,7 +1,7 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
 import { useSiteData } from "../context/SiteDataContext";
-import { GithubIcon, LinkedinIcon } from "./icons";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "./icons";
 
 export default function Hero() {
   const { profile } = useSiteData();
@@ -73,6 +73,17 @@ export default function Hero() {
         </motion.div>
 
         <motion.div variants={item} className="mt-10 flex items-center gap-5 text-neutral-500 dark:text-neutral-500">
+          {profile.social.whatsapp && (
+            <a
+              href={`https://wa.me/${profile.social.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp"
+              className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
+            >
+              <WhatsappIcon size={20} />
+            </a>
+          )}
           <a
             href={profile.social.github}
             target="_blank"

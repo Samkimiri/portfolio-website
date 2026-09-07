@@ -2,7 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Mail, Phone } from "lucide-react";
 import { useSiteData } from "../context/SiteDataContext";
 import { supabase } from "../lib/supabase";
-import { GithubIcon, LinkedinIcon } from "./icons";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "./icons";
 import Reveal from "./Reveal";
 
 type Status = "idle" | "submitting" | "success" | "error";
@@ -158,6 +158,21 @@ export default function Contact() {
 
           <Reveal delay={0.1}>
             <div className="space-y-4">
+              {profile.social.whatsapp && (
+                <a
+                  href={`https://wa.me/${profile.social.whatsapp}?text=${encodeURIComponent(
+                    `Hi ${profile.shortName}, I found your portfolio and I'd like to chat.`,
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 rounded-xl border border-emerald-500/50 bg-emerald-500/5 p-4 transition-colors hover:border-emerald-500"
+                >
+                  <WhatsappIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
+                  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                    Chat on WhatsApp — usually the fastest way to reach me
+                  </span>
+                </a>
+              )}
               <a
                 href={`mailto:${profile.social.email}`}
                 className="flex items-center gap-3 rounded-xl border border-neutral-200 p-4 transition-colors hover:border-emerald-500/50 dark:border-neutral-800"
