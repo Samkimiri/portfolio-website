@@ -1,24 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { signOut } from "../lib/auth";
 import { useSiteData } from "../context/SiteDataContext";
+import { countUnreadSubmissions } from "../lib/contactSubmissions";
 import ProfileEditor from "./ProfileEditor";
 import SkillsEditor from "./SkillsEditor";
 import ExperienceEditor from "./ExperienceEditor";
 import ProjectsEditor from "./ProjectsEditor";
+import MessagesEditor from "./MessagesEditor";
 
-type Tab = "profile" | "skills" | "experience" | "projects";
+type Tab = "profile" | "skills" | "experience" | "projects" | "messages";
 
 const tabs: { id: Tab; label: string }[] = [
+  { id: "projects", label: "Projects" },
   { id: "profile", label: "Profile" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
-  { id: "projects", label: "Projects" },
+  { id: "messages", label: "Messages" },
 ];
 
 export default function Dashboard() {
   const [tab, setTab] = useState<Tab>("projects");
-  const { loading } = useSiteData();
+  const { loading, syncErrors, refresh } = useSiteData();
+  const errorEntries = Object.entries(syncErrors);
+  const [unread, setUnread] = useState(0);
+
+  useEffect(() => {
+    countUnreadSubmissions().then(setUnread);
+  }, [tab]);
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
@@ -44,6 +53,32 @@ export default function Dashboard() {
       </header>
 
       <div className="mx-auto max-w-4xl px-6 py-8">
+        {errorEntries.length > 0 && (
+          <div className="mb-6 flex items-start justify-between gap-4 rounded-2xl border border-red-500/40 bg-red-500/10 p-4 text-sm text-red-800 dark:text-red-300">
+            <div>
+              <p className="font-medium">Live content failed to sync — showing fallback data.</p>
+              <ul className="mt-1 list-inside list-disc">
+                {errorEntries.map(([key, message]) => (
+                  <li key={key}>
+                    {key}: {message}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-1 text-red-700/80 dark:text-red-400/80">
+                Edits made now may not reflect what visitors see until this is resolved. Check your Supabase project
+                is reachable and the env vars are correct, then retry.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={refresh}
+              className="shrink-0 rounded-full border border-red-500/40 px-3 py-1 text-xs font-medium hover:bg-red-500/10"
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
         <nav className="mb-8 flex flex-wrap gap-2">
           {tabs.map((t) => (
             <button
@@ -57,11 +92,18 @@ export default function Dashboard() {
               }`}
             >
               {t.label}
+              {t.id === "messages" && unread > 0 && (
+                <span className="ml-1.5 rounded-full bg-red-500 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                  {unread}
+                </span>
+              )}
             </button>
           ))}
         </nav>
 
-        {loading ? (
+        {tab === "messages" ? (
+          <MessagesEditor />
+        ) : loading ? (
           <p className="text-sm text-neutral-500 dark:text-neutral-400">Loading content…</p>
         ) : (
           <>

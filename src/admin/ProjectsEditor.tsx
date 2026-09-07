@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { useSiteData } from "../context/SiteDataContext";
 import { saveSiteContent } from "../lib/siteContent";
+import { uploadProjectScreenshot } from "../lib/storage";
 import type { Project } from "../types";
 import { cardClasses, inputClasses, labelClasses, SaveBar, IconButton } from "./shared";
 
@@ -26,6 +27,7 @@ export default function ProjectsEditor() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [uploadState, setUploadState] = useState<Record<string, { uploading: boolean; error: string | null }>>({});
 
   function update(index: number, project: Project) {
     const next = [...form];
@@ -49,6 +51,20 @@ export default function ProjectsEditor() {
     [next[index], next[target]] = [next[target], next[index]];
     setForm(next);
     setSaved(false);
+  }
+
+  async function handleFileChange(index: number, project: Project, event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+
+    setUploadState((prev) => ({ ...prev, [project.id]: { uploading: true, error: null } }));
+
+    const { url, error } = await uploadProjectScreenshot(project.id, file);
+
+    setUploadState((prev) => ({ ...prev, [project.id]: { uploading: false, error } }));
+
+    if (url) update(index, { ...project, screenshot: url });
   }
 
   async function handleSave() {
@@ -147,12 +163,35 @@ export default function ProjectsEditor() {
               />
             </div>
             <div>
-              <label className={labelClasses}>Screenshot URL</label>
-              <input
-                className={inputClasses}
-                value={project.screenshot ?? ""}
-                onChange={(e) => update(index, { ...project, screenshot: e.target.value || null })}
-              />
+              <label className={labelClasses}>Screenshot</label>
+              <div className="flex items-center gap-2">
+                {project.screenshot && (
+                  <img
+                    src={project.screenshot}
+                    alt=""
+                    className="h-9 w-16 shrink-0 rounded object-cover"
+                  />
+                )}
+                <input
+                  className={inputClasses}
+                  placeholder="Paste a URL, or upload →"
+                  value={project.screenshot ?? ""}
+                  onChange={(e) => update(index, { ...project, screenshot: e.target.value || null })}
+                />
+                <label className="shrink-0 cursor-pointer rounded-full border border-neutral-300 px-3 py-2 text-xs font-medium text-neutral-600 hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-400">
+                  {uploadState[project.id]?.uploading ? "Uploading…" : "Upload"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    disabled={uploadState[project.id]?.uploading}
+                    onChange={(e) => handleFileChange(index, project, e)}
+                  />
+                </label>
+              </div>
+              {uploadState[project.id]?.error && (
+                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{uploadState[project.id]?.error}</p>
+              )}
             </div>
             <div>
               <label className={labelClasses}>Accent color</label>

@@ -15,6 +15,10 @@ export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  // Honeypot: hidden from real visitors via CSS below. Bots that fill in
+  // every field trip this, so we quietly pretend success instead of
+  // inserting — no point tipping them off that they've been caught.
+  const [company, setCompany] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -23,6 +27,14 @@ export default function Contact() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!supabase) return;
+
+    if (company) {
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+      return;
+    }
 
     setStatus("submitting");
     setErrorMessage("");
@@ -54,6 +66,19 @@ export default function Contact() {
         <div className="mt-12 grid gap-12 lg:grid-cols-2">
           <Reveal delay={0.05}>
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
+              <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+                <label htmlFor="company">Company</label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={company}
+                  onChange={(e) => setCompany(e.target.value)}
+                />
+              </div>
+
               <div>
                 <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
                   Name
@@ -63,6 +88,7 @@ export default function Contact() {
                   name="name"
                   type="text"
                   required
+                  maxLength={200}
                   autoComplete="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -79,6 +105,7 @@ export default function Contact() {
                   name="email"
                   type="email"
                   required
+                  maxLength={200}
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -94,6 +121,7 @@ export default function Contact() {
                   id="message"
                   name="message"
                   required
+                  maxLength={5000}
                   rows={5}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}

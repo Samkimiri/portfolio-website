@@ -28,24 +28,29 @@ Other scripts: `npm run build` (typecheck + production build), `npm run typechec
 ```
 src/
   admin/          The /admin panel — Login, Dashboard, and one editor per
-                   section (Profile, Skills, Experience, Projects)
+                   section (Profile, Skills, Experience, Projects,
+                   Messages — the contact form inbox)
   components/     UI sections and pieces (Navbar, Hero, About, Skills,
                    Projects, ProjectCard, ProjectModal, Experience,
                    Contact, Footer, ThemeToggle, Reveal, icons)
   context/        SiteDataContext — loads content from Supabase (falling
-                   back to src/data/ if unset or empty) and shares it with
-                   every component
+                   back to src/data/ if unset or empty), retries failed
+                   fetches, and shares the result with every component
   data/           Seed/fallback content — profile.ts, skills.ts,
                    projects.ts, experience.ts (only used until Supabase
                    has real rows — see "Editing content" below)
   hooks/          useTheme (dark/light mode, persisted to localStorage)
   lib/            supabase.ts (client), auth.ts (admin sign-in),
-                   siteContent.ts (read/write site_content table),
-                   accent.ts (project accent colors)
+                   siteContent.ts (read/write site_content table, with
+                   retry), contactSubmissions.ts (read/manage contact
+                   form messages), storage.ts (upload project
+                   screenshots), accent.ts (project accent colors)
   types.ts        Shared content types
 supabase/
-  schema.sql      Run once in the Supabase SQL editor — creates the
-                   site_content table + RLS policies the admin panel needs
+  schema.sql      Run in the Supabase SQL editor (safe to re-run anytime)
+                   — creates every table, storage bucket, and RLS policy
+                   this app needs: site_content, contact_submissions, and
+                   the project-screenshots storage bucket
 ```
 
 ## Editing content
@@ -54,61 +59,39 @@ Once Supabase is set up (below) and you've signed in, go to `/admin` and edit an
 
 Until Supabase is configured (or a section has never been saved), the site falls back to the static files in `src/data/` — useful for local development without a database.
 
+Project screenshots can either be a pasted URL or uploaded directly — the Projects tab has an "Upload" button next to the screenshot field that stores the image in Supabase Storage and fills in the URL for you.
+
+The **Messages** tab shows everyone who's submitted the Contact form, newest first, with unread highlighted. Mark a message read/unread or delete it — no more digging through the Supabase dashboard to see who's reached out.
+
+If live content ever fails to load (network issue, misconfigured env vars, etc.), `/admin` shows a red banner naming exactly which section failed and why, with a Retry button — the public site itself stays silent and just serves the last-known-good fallback rather than showing visitors an error.
+
 ## Things you still need to plug in
 
 - **Resume PDF** — drop it in `public/resume.pdf` (or wherever) and set `resumeUrl` in `src/data/profile.ts`. The "Download Resume" button is hidden until this is set.
 - **Phone number** (optional) — set `social.phone` in `src/data/profile.ts` to show it in Contact/Hero.
-- **Project links, repos, screenshots** — in `src/data/projects.ts`, each project has `liveUrl` / `repoUrl` / `screenshot`. While `null`, the project card shows a clearly marked `[LIVE LINK]` / `[GITHUB LINK]` / `[SCREENSHOT]` placeholder so it's obvious what's missing.
+- **Project links, repos, screenshots** — edit these in `/admin` → Projects once Supabase is set up (screenshots can be uploaded directly there), or in `src/data/projects.ts` beforehand. While a field is `null`, the project card shows a clearly marked `[LIVE LINK]` / `[GITHUB LINK]` / `[SCREENSHOT]` placeholder so it's obvious what's missing.
 - **OG image** — `index.html` references `/og-image.png` for social share previews (1200×630 recommended). Add that file to `public/`.
 - **Supabase project** — see below.
 
-## Supabase setup (contact form)
+## Supabase setup
+
+One Supabase project backs the contact form, all editable content, and the admin panel.
 
 1. Create a project at [supabase.com](https://supabase.com).
-2. In the SQL editor, run:
-
-   ```sql
-   create table contact_submissions (
-     id uuid primary key default gen_random_uuid(),
-     name text not null,
-     email text not null,
-     message text not null,
-     created_at timestamptz not null default now()
-   );
-
-   alter table contact_submissions enable row level security;
-
-   -- Anyone can submit the form, but only you (via the dashboard, using
-   -- the service role) can read submissions back — no public select policy.
-   create policy "Allow public inserts"
-     on contact_submissions
-     for insert
-     to anon
-     with check (true);
-   ```
-
-3. In Project Settings → API, copy the **Project URL** and **anon public key**.
-4. Put them in `.env.local` (copy `.env.example`):
+2. In the SQL editor, run everything in [`supabase/schema.sql`](supabase/schema.sql). It's a single, idempotent file (safe to run again later after a pull) that sets up:
+   - `site_content` — one JSON row per section (profile, skills, experience, projects), public read, admin-only write.
+   - `contact_submissions` — anyone can submit, only a signed-in admin can read/manage (via the Messages tab).
+   - a `project-screenshots` storage bucket — public read, admin-only upload, for the screenshot upload button in the Projects tab.
+3. In Project Settings → API, copy the **Project URL** and **anon public key**, and put them in `.env.local` (copy `.env.example`):
 
    ```
    VITE_SUPABASE_URL=https://your-project.supabase.co
    VITE_SUPABASE_ANON_KEY=your-anon-public-key
    ```
 
-Until these are set, the contact form stays visibly disabled with a note explaining why, instead of silently failing.
-
-## Supabase setup (site content + admin panel)
-
-The same Supabase project also backs `/admin`. In the SQL editor, additionally run everything in [`supabase/schema.sql`](supabase/schema.sql) — it creates a `site_content` table (one JSON row per section: profile, skills, experience, projects) with row-level security so anyone can read it (that's what renders the public site) but only a signed-in user can write.
-
-Then create yourself an admin account:
-
-1. In the Supabase dashboard, go to **Authentication → Users → Add user**.
-2. Create a user with your email and a password (skip "send invite" — just set the password directly).
-3. Go to `/admin` on your site (locally: `http://localhost:5173/admin`) and sign in with those credentials.
-4. Open each tab (Profile, Skills, Experience, Projects) and hit **Save changes** once — this seeds `site_content` with your current data so the database becomes the source of truth. From then on, edit directly in `/admin`.
-
-Only people with a Supabase Auth account you've created can sign in — there's no public sign-up.
+   Until these are set, the contact form stays visibly disabled with a note explaining why, instead of silently failing, and `/admin` shows a setup notice instead of a login form.
+4. Create yourself an admin account: **Authentication → Users → Add user** in the Supabase dashboard. Set a password directly (skip "send invite"). There's no public sign-up — only accounts you create here can sign in.
+5. Go to `/admin` on your site (locally: `http://localhost:5173/admin`), sign in, and open each of Profile/Skills/Experience/Projects and hit **Save changes** once — this seeds `site_content` with your current data so the database becomes the source of truth. From then on, edit directly in `/admin`.
 
 ## Deploying to Vercel
 
