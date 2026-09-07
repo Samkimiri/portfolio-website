@@ -24,5 +24,6 @@ export const profile: Profile = {
     email: "samkimiri550307@gmail.com",
     // TODO: add a public phone number here if you want it shown, e.g. "+254 7XX XXX XXX"
     phone: undefined,
+    whatsapp: "254743475247",
   },
 };
