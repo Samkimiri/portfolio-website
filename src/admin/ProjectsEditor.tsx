@@ -2,6 +2,7 @@ import { useState, type ChangeEvent } from "react";
 import { useSiteData } from "../context/SiteDataContext";
 import { saveSiteContent } from "../lib/siteContent";
 import { uploadProjectScreenshot } from "../lib/storage";
+import { generateProjectScreenshot } from "../lib/generateImage";
 import type { Project } from "../types";
 import { cardClasses, inputClasses, labelClasses, SaveBar, IconButton } from "./shared";
 
@@ -28,6 +29,8 @@ export default function ProjectsEditor() {
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const [uploadState, setUploadState] = useState<Record<string, { uploading: boolean; error: string | null }>>({});
+  const [aiPrompt, setAiPrompt] = useState<Record<string, string>>({});
+  const [aiState, setAiState] = useState<Record<string, { generating: boolean; error: string | null }>>({});
 
   function update(index: number, project: Project) {
     const next = [...form];
@@ -63,6 +66,19 @@ export default function ProjectsEditor() {
     const { url, error } = await uploadProjectScreenshot(project.id, file);
 
     setUploadState((prev) => ({ ...prev, [project.id]: { uploading: false, error } }));
+
+    if (url) update(index, { ...project, screenshot: url });
+  }
+
+  async function handleGenerate(index: number, project: Project) {
+    const prompt = aiPrompt[project.id]?.trim();
+    if (!prompt) return;
+
+    setAiState((prev) => ({ ...prev, [project.id]: { generating: true, error: null } }));
+
+    const { url, error } = await generateProjectScreenshot(project.id, prompt);
+
+    setAiState((prev) => ({ ...prev, [project.id]: { generating: false, error } }));
 
     if (url) update(index, { ...project, screenshot: url });
   }
@@ -191,6 +207,27 @@ export default function ProjectsEditor() {
               </div>
               {uploadState[project.id]?.error && (
                 <p className="mt-1 text-xs text-red-600 dark:text-red-400">{uploadState[project.id]?.error}</p>
+              )}
+
+              <div className="mt-2 flex items-center gap-2">
+                <input
+                  className={inputClasses}
+                  placeholder="Describe an image to generate…"
+                  value={aiPrompt[project.id] ?? ""}
+                  onChange={(e) => setAiPrompt((prev) => ({ ...prev, [project.id]: e.target.value }))}
+                  disabled={aiState[project.id]?.generating}
+                />
+                <button
+                  type="button"
+                  onClick={() => handleGenerate(index, project)}
+                  disabled={aiState[project.id]?.generating || !aiPrompt[project.id]?.trim()}
+                  className="shrink-0 rounded-full border border-neutral-300 px-3 py-2 text-xs font-medium text-neutral-600 hover:border-neutral-400 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-700 dark:text-neutral-400"
+                >
+                  {aiState[project.id]?.generating ? "Generating…" : "Generate with AI"}
+                </button>
+              </div>
+              {aiState[project.id]?.error && (
+                <p className="mt-1 text-xs text-red-600 dark:text-red-400">{aiState[project.id]?.error}</p>
               )}
             </div>
             <div>
