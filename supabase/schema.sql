@@ -145,3 +145,25 @@ create policy "Authenticated delete project screenshots"
   on storage.objects for delete
   to authenticated
   using (bucket_id = 'project-screenshots');
+
+-- =====================================================================
+-- Contact notification — fires the `notify-contact` Edge Function (see
+-- supabase/functions/notify-contact) whenever a new contact_submissions
+-- row is inserted, which emails the site owner via Resend.
+--
+-- DO NOT paste this as-is: replace YOUR_WEBHOOK_SECRET with the actual
+-- value set via `supabase secrets set WEBHOOK_SECRET=...` for this
+-- project. This file is public — the real secret must never be committed,
+-- only ever pasted directly into the SQL editor when (re-)creating this
+-- trigger.
+-- =====================================================================
+
+create or replace trigger "notify_contact_submission"
+after insert on public.contact_submissions
+for each row execute function supabase_functions.http_request(
+  'https://vhhfxcibpqjbulxohcxv.supabase.co/functions/v1/notify-contact',
+  'POST',
+  '{"Content-type":"application/json","x-webhook-secret":"YOUR_WEBHOOK_SECRET"}',
+  '{}',
+  '5000'
+);
