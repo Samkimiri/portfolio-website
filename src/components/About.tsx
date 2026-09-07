@@ -1,7 +1,8 @@
-import { profile } from "../data/profile";
+import { useSiteData } from "../context/SiteDataContext";
 import Reveal from "./Reveal";
 
 export default function About() {
+  const { profile } = useSiteData();
   return (
     <section id="about" className="border-t border-neutral-200 px-6 py-24 dark:border-neutral-900">
       <div className="mx-auto max-w-5xl">

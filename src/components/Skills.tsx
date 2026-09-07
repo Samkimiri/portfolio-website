@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { skillGroups } from "../data/skills";
+import { useSiteData } from "../context/SiteDataContext";
 import Reveal from "./Reveal";
 
 export default function Skills() {
+  const { skillGroups } = useSiteData();
   return (
     <section id="skills" className="border-t border-neutral-200 px-6 py-24 dark:border-neutral-900">
       <div className="mx-auto max-w-5xl">

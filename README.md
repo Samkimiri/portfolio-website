@@ -1,14 +1,15 @@
 # Sam Kimiri — Portfolio
 
-Personal portfolio for Samuel Ndung'u Kimiri (Sam), fullstack software engineer. React + TypeScript + Tailwind CSS, animated with Framer Motion, contact form backed by Supabase, deployed on Vercel.
+Personal portfolio for Samuel Ndung'u Kimiri (Sam), fullstack software engineer. React + TypeScript + Tailwind CSS, animated with Framer Motion, contact form and all page content backed by Supabase, deployed on Vercel. Includes a password-protected `/admin` panel for editing every section of the site — profile, skills, experience, projects — without touching code.
 
 ## Stack
 
 - React 18 + TypeScript, built with Vite
+- React Router — `/` is the public site, `/admin` is the content editor
 - Tailwind CSS v4 (class-based dark mode, toggle in the navbar)
 - Framer Motion — scroll-reveal, hero entrance, hover/tap micro-interactions, respects `prefers-reduced-motion`
-- Supabase — stores contact form submissions
-- Single scrolling page with anchor nav (`#about`, `#skills`, `#projects`, `#experience`, `#contact`); project details open in a modal rather than a separate route
+- Supabase — stores contact form submissions, all editable page content, and admin authentication
+- Single scrolling public page with anchor nav (`#about`, `#skills`, `#projects`, `#experience`, `#contact`); project details open in a modal rather than a separate route
 
 ## Getting started
 
@@ -26,17 +27,32 @@ Other scripts: `npm run build` (typecheck + production build), `npm run typechec
 
 ```
 src/
+  admin/          The /admin panel — Login, Dashboard, and one editor per
+                   section (Profile, Skills, Experience, Projects)
   components/     UI sections and pieces (Navbar, Hero, About, Skills,
                    Projects, ProjectCard, ProjectModal, Experience,
                    Contact, Footer, ThemeToggle, Reveal, icons)
-  data/           Editable content — profile.ts, skills.ts, projects.ts,
-                   experience.ts
+  context/        SiteDataContext — loads content from Supabase (falling
+                   back to src/data/ if unset or empty) and shares it with
+                   every component
+  data/           Seed/fallback content — profile.ts, skills.ts,
+                   projects.ts, experience.ts (only used until Supabase
+                   has real rows — see "Editing content" below)
   hooks/          useTheme (dark/light mode, persisted to localStorage)
-  lib/            supabase.ts (client), accent.ts (project accent colors)
+  lib/            supabase.ts (client), auth.ts (admin sign-in),
+                   siteContent.ts (read/write site_content table),
+                   accent.ts (project accent colors)
   types.ts        Shared content types
+supabase/
+  schema.sql      Run once in the Supabase SQL editor — creates the
+                   site_content table + RLS policies the admin panel needs
 ```
 
-All real content lives in `src/data/` — edit those files, not the components, to update your bio, skills, projects, or timeline.
+## Editing content
+
+Once Supabase is set up (below) and you've signed in, go to `/admin` and edit any section — Profile, Skills, Experience, or Projects — then hit "Save changes". That writes straight to the database; the public site picks it up on next load. No code changes, no redeploy.
+
+Until Supabase is configured (or a section has never been saved), the site falls back to the static files in `src/data/` — useful for local development without a database.
 
 ## Things you still need to plug in
 
@@ -80,6 +96,19 @@ All real content lives in `src/data/` — edit those files, not the components, 
    ```
 
 Until these are set, the contact form stays visibly disabled with a note explaining why, instead of silently failing.
+
+## Supabase setup (site content + admin panel)
+
+The same Supabase project also backs `/admin`. In the SQL editor, additionally run everything in [`supabase/schema.sql`](supabase/schema.sql) — it creates a `site_content` table (one JSON row per section: profile, skills, experience, projects) with row-level security so anyone can read it (that's what renders the public site) but only a signed-in user can write.
+
+Then create yourself an admin account:
+
+1. In the Supabase dashboard, go to **Authentication → Users → Add user**.
+2. Create a user with your email and a password (skip "send invite" — just set the password directly).
+3. Go to `/admin` on your site (locally: `http://localhost:5173/admin`) and sign in with those credentials.
+4. Open each tab (Profile, Skills, Experience, Projects) and hit **Save changes** once — this seeds `site_content` with your current data so the database becomes the source of truth. From then on, edit directly in `/admin`.
+
+Only people with a Supabase Auth account you've created can sign in — there's no public sign-up.
 
 ## Deploying to Vercel
 

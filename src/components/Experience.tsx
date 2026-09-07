@@ -1,7 +1,8 @@
-import { experience } from "../data/experience";
+import { useSiteData } from "../context/SiteDataContext";
 import Reveal from "./Reveal";
 
 export default function Experience() {
+  const { experience } = useSiteData();
   return (
     <section id="experience" className="border-t border-neutral-200 px-6 py-24 dark:border-neutral-900">
       <div className="mx-auto max-w-5xl">

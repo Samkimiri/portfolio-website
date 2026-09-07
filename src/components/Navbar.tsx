@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { profile } from "../data/profile";
+import { useSiteData } from "../context/SiteDataContext";
 import ThemeToggle from "./ThemeToggle";
 
 const links = [
@@ -13,6 +13,7 @@ const links = [
 ];
 
 export default function Navbar() {
+  const { profile } = useSiteData();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 

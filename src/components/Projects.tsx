@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { projects } from "../data/projects";
+import { useSiteData } from "../context/SiteDataContext";
 import type { Project } from "../types";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import Reveal from "./Reveal";
 
 export default function Projects() {
+  const { projects } = useSiteData();
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const reduceMotion = useReducedMotion();
 

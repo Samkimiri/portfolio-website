@@ -1,9 +1,10 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
-import { profile } from "../data/profile";
+import { useSiteData } from "../context/SiteDataContext";
 import { GithubIcon, LinkedinIcon } from "./icons";
 
 export default function Hero() {
+  const { profile } = useSiteData();
   const reduceMotion = useReducedMotion();
 
   const container: Variants = {

@@ -1,6 +1,7 @@
-import { profile } from "../data/profile";
+import { useSiteData } from "../context/SiteDataContext";
 
 export default function Footer() {
+  const { profile } = useSiteData();
   const year = new Date().getFullYear();
 
   return (
