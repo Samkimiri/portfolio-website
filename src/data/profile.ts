@@ -1,9 +1,6 @@
 import type { Profile } from "../types";
 
-// TODO: drop your resume PDF into public/resume.pdf (or wherever you like)
-// and set resumeUrl below. The "Download Resume" button hides itself while
-// this is null.
-const resumeUrl: string | null = null;
+const resumeUrl: string | null = "/resume.pdf";
 
 export const profile: Profile = {
   name: "Samuel Ndung'u Kimiri",
@@ -22,8 +19,7 @@ export const profile: Profile = {
     github: "https://github.com/Samkimiri",
     linkedin: "https://linkedin.com/in/samuel-ndung-u-kimiri-a85a41267",
     email: "samkimiri550307@gmail.com",
-    // TODO: add a public phone number here if you want it shown, e.g. "+254 7XX XXX XXX"
-    phone: undefined,
+    phone: "+254 748 201 131",
     whatsapp: "254743475247",
   },
 };
