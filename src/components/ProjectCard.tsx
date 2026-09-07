@@ -2,6 +2,7 @@ import { ExternalLink, ImageOff } from "lucide-react";
 import type { Project } from "../types";
 import { accentClasses } from "../lib/accent";
 import { GithubIcon } from "./icons";
+import BrowserFrame from "./BrowserFrame";
 
 interface ProjectCardProps {
   project: Project;
@@ -13,24 +14,22 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors hover:border-neutral-300 dark:border-neutral-800 dark:bg-neutral-900/50 dark:hover:border-neutral-700">
-      <button
-        type="button"
-        onClick={() => onOpen(project)}
-        className="flex aspect-video items-center justify-center overflow-hidden bg-neutral-100 dark:bg-neutral-800"
-      >
-        {project.screenshot ? (
-          <img
-            src={project.screenshot}
-            alt={`${project.name} screenshot`}
-            loading="lazy"
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <span className="flex items-center gap-2 text-sm text-neutral-400 dark:text-neutral-600">
-            <ImageOff size={16} />
-            [SCREENSHOT]
-          </span>
-        )}
+      <button type="button" onClick={() => onOpen(project)} className="block aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+        <BrowserFrame url={project.liveUrl}>
+          {project.screenshot ? (
+            <img
+              src={project.screenshot}
+              alt={`${project.name} screenshot`}
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <span className="flex h-full items-center justify-center gap-2 text-sm text-neutral-400 dark:text-neutral-600">
+              <ImageOff size={16} />
+              [SCREENSHOT]
+            </span>
+          )}
+        </BrowserFrame>
       </button>
 
       <div className="flex flex-1 flex-col p-6">

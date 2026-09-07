@@ -4,6 +4,7 @@ import { ExternalLink, ImageOff, X } from "lucide-react";
 import type { Project } from "../types";
 import { accentClasses } from "../lib/accent";
 import { GithubIcon } from "./icons";
+import BrowserFrame from "./BrowserFrame";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -68,20 +69,22 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <X size={16} />
             </button>
 
-            <div className="mb-6 flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800">
-              {project.screenshot ? (
-                <img
-                  src={project.screenshot}
-                  alt={`${project.name} screenshot`}
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <span className="flex items-center gap-2 text-sm text-neutral-400 dark:text-neutral-600">
-                  <ImageOff size={16} />
-                  [SCREENSHOT]
-                </span>
-              )}
+            <div className="mb-6 aspect-video overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800">
+              <BrowserFrame url={project.liveUrl}>
+                {project.screenshot ? (
+                  <img
+                    src={project.screenshot}
+                    alt={`${project.name} screenshot`}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <span className="flex h-full items-center justify-center gap-2 text-sm text-neutral-400 dark:text-neutral-600">
+                    <ImageOff size={16} />
+                    [SCREENSHOT]
+                  </span>
+                )}
+              </BrowserFrame>
             </div>
 
             <div className="flex items-start justify-between gap-3 pr-8">
