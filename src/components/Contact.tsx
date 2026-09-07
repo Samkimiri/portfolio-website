@@ -42,8 +42,16 @@ export default function Contact() {
     const { error } = await supabase.from("contact_submissions").insert({ name, email, message });
 
     if (error) {
+      console.error("Contact form submission failed:", error);
       setStatus("error");
-      setErrorMessage(error.message);
+      // Rate-limit rejections raise a deliberately friendly message from the
+      // database — safe to show verbatim. Anything else could leak internal
+      // detail (constraint names, etc.), so show a generic message instead.
+      setErrorMessage(
+        error.message.toLowerCase().includes("too many messages")
+          ? error.message
+          : "Something went wrong on our end. Please try again in a moment, or email me directly.",
+      );
       return;
     }
 
@@ -136,6 +144,10 @@ export default function Contact() {
               >
                 {status === "submitting" ? "Sending…" : "Send message"}
               </button>
+
+              <p className="text-xs text-neutral-400 dark:text-neutral-600">
+                Used only to reply to you — never shared or used for anything else.
+              </p>
 
               <div aria-live="polite" className="min-h-[1.5rem] text-sm">
                 {!configured && (

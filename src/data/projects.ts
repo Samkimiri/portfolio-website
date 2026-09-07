@@ -14,7 +14,7 @@ export const projects: Project[] = [
     tags: ["React", "Supabase", "M-Pesa", "Vercel", "Netlify"],
     liveUrl: "https://renziy-gkni.vercel.app/",
     repoUrl: null,
-    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/renziy-cover.png",
+    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/renziy-cover.webp",
     accent: "emerald",
   },
   {
@@ -27,7 +27,7 @@ export const projects: Project[] = [
     liveUrl: "https://imara-finance-ai.vercel.app/",
     repoUrl: null,
     screenshot:
-      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/imara-finance-ai-cover.png",
+      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/imara-finance-ai-cover.webp",
     accent: "sky",
   },
   {
@@ -39,7 +39,7 @@ export const projects: Project[] = [
     tags: ["React", "Tailwind CSS", "Supabase", "Vercel"],
     liveUrl: "https://paytrack-gold.vercel.app/",
     repoUrl: null,
-    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/paytrack-cover.png",
+    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/paytrack-cover.webp",
     accent: "violet",
   },
   {
@@ -52,7 +52,7 @@ export const projects: Project[] = [
     liveUrl: "https://samcreativedesignschool.com/",
     repoUrl: null,
     screenshot:
-      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/scds-learning-platform-cover.png",
+      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/scds-learning-platform-cover.webp",
     accent: "amber",
   },
   {
@@ -65,7 +65,7 @@ export const projects: Project[] = [
     liveUrl: "https://publish-scds-volunteer-registration.vercel.app/",
     repoUrl: null,
     screenshot:
-      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/scds-volunteer-registration-cover.png",
+      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/scds-volunteer-registration-cover.webp",
     accent: "emerald",
   },
   {
@@ -78,7 +78,7 @@ export const projects: Project[] = [
     liveUrl: "https://sam-creative-graphics.vercel.app/",
     repoUrl: null,
     screenshot:
-      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/sam-creative-graphics-cover.png",
+      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/sam-creative-graphics-cover.webp",
     accent: "sky",
   },
   {
@@ -90,7 +90,7 @@ export const projects: Project[] = [
     tags: ["Fintech", "React", "Supabase"],
     liveUrl: "https://ujimasacco-nine.vercel.app/",
     repoUrl: null,
-    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/ujima-sacco-cover.png",
+    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/ujima-sacco-cover.webp",
     accent: "violet",
   },
   {
@@ -103,7 +103,7 @@ export const projects: Project[] = [
     liveUrl: "https://webhook-verification.vercel.app/",
     repoUrl: null,
     screenshot:
-      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/webhook-verification-cover.png",
+      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/webhook-verification-cover.webp",
     accent: "amber",
   },
   {
@@ -116,7 +116,7 @@ export const projects: Project[] = [
     liveUrl: "https://reflex-the-readiness-sprint-group-7.vercel.app/",
     repoUrl: null,
     screenshot:
-      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/reflex-readiness-sprint-cover.png",
+      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/reflex-readiness-sprint-cover.webp",
     accent: "emerald",
   },
 ];

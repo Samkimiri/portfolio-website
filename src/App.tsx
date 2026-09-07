@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -8,6 +9,7 @@ import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AdminApp from "./admin/AdminApp";
+import NotFound from "./components/NotFound";
 import { SiteDataProvider } from "./context/SiteDataContext";
 
 function MainSite() {
@@ -33,7 +35,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MainSite />} />
         <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      <Analytics />
     </SiteDataProvider>
   );
 }

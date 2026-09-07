@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://portfolio-website-pi-henna-13.vercel.app/sitemap.xml

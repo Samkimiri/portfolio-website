@@ -23,15 +23,27 @@ const HF_AUTH = `Key ${HF_API_KEY_ID}:${HF_API_KEY_SECRET}`;
 const POLL_INTERVAL_MS = 2000;
 const MAX_POLL_ATTEMPTS = 30; // ~60s ceiling; images typically finish in a few seconds
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, apikey, content-type",
-};
+// Only the site itself (and local dev) should ever call this — it's
+// gated by JWT anyway, but there's no reason to also allow arbitrary
+// origins to attempt it.
+const ALLOWED_ORIGINS = new Set([
+  "https://portfolio-website-pi-henna-13.vercel.app",
+  "http://localhost:5173",
+]);
 
-function json(body: unknown, status = 200) {
+function corsHeadersFor(req: Request) {
+  const origin = req.headers.get("origin") ?? "";
+  return {
+    "Access-Control-Allow-Origin": ALLOWED_ORIGINS.has(origin) ? origin : "null",
+    "Access-Control-Allow-Headers": "authorization, apikey, content-type",
+    Vary: "Origin",
+  };
+}
+
+function json(req: Request, body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
+    headers: { ...corsHeadersFor(req), "Content-Type": "application/json" },
   });
 }
 
@@ -45,12 +57,12 @@ interface HiggsfieldJob {
 const TERMINAL_STATUSES = new Set(["completed", "failed", "nsfw", "canceled"]);
 
 Deno.serve(async (req) => {
-  if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
+  if (req.method === "OPTIONS") return new Response(null, { headers: corsHeadersFor(req) });
 
   try {
     const { prompt, projectId } = await req.json();
     if (!prompt || !projectId) {
-      return json({ error: "prompt and projectId are required" }, 400);
+      return json(req, { error: "prompt and projectId are required" }, 400);
     }
 
     const submitResponse = await fetch("https://api.higgsfield.ai/higgsfield-ai/soul/v2/standard", {
@@ -60,7 +72,7 @@ Deno.serve(async (req) => {
     });
 
     if (!submitResponse.ok) {
-      return json({ error: `Higgsfield request failed: ${await submitResponse.text()}` }, 502);
+      return json(req, { error: `Higgsfield request failed: ${await submitResponse.text()}` }, 502);
     }
 
     let job: HiggsfieldJob = await submitResponse.json();
@@ -73,7 +85,7 @@ Deno.serve(async (req) => {
 
     const imageUrl = job.images?.[0]?.url;
     if (job.status !== "completed" || !imageUrl) {
-      return json({ error: `Image generation ${job.status}${job.error ? `: ${job.error}` : ""}` }, 502);
+      return json(req, { error: `Image generation ${job.status}${job.error ? `: ${job.error}` : ""}` }, 502);
     }
 
     const imageResponse = await fetch(imageUrl);
@@ -86,11 +98,11 @@ Deno.serve(async (req) => {
       .from(BUCKET)
       .upload(path, await imageResponse.blob(), { contentType, upsert: true });
 
-    if (uploadError) return json({ error: `Storage upload failed: ${uploadError.message}` }, 500);
+    if (uploadError) return json(req, { error: `Storage upload failed: ${uploadError.message}` }, 500);
 
     const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-    return json({ url: data.publicUrl });
+    return json(req, { url: data.publicUrl });
   } catch (err) {
-    return json({ error: String(err) }, 500);
+    return json(req, { error: String(err) }, 500);
   }
 });

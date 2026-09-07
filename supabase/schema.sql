@@ -78,6 +78,26 @@ alter table contact_submissions add constraint contact_submissions_email_length 
 alter table contact_submissions drop constraint if exists contact_submissions_message_length;
 alter table contact_submissions add constraint contact_submissions_message_length check (char_length(message) between 1 and 5000);
 
+-- Server-side rate limit: the Contact form's honeypot is client-side JS
+-- only, so a script hitting the REST API directly bypasses it entirely.
+-- This blocks basic flooding (each accepted row also sends an email via
+-- notify-contact, so unlimited inserts means unlimited emails) without
+-- needing to capture IP addresses. 5/minute is generous for a real visitor
+-- but stops a naive spam script cold.
+create or replace function contact_submissions_rate_limit() returns trigger as $$
+begin
+  if (select count(*) from contact_submissions where created_at > now() - interval '1 minute') >= 5 then
+    raise exception 'Too many messages sent recently. Please wait a bit and try again.';
+  end if;
+  return new;
+end;
+$$ language plpgsql security definer;
+
+drop trigger if exists contact_submissions_rate_limit_trigger on contact_submissions;
+create trigger contact_submissions_rate_limit_trigger
+before insert on contact_submissions
+for each row execute function contact_submissions_rate_limit();
+
 -- `authenticated` is included too so a signed-in admin testing the form
 -- (or any logged-in visitor) isn't blocked — Supabase's client sends the
 -- session's role automatically, not just the anon key, whenever one exists.
