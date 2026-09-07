@@ -78,11 +78,14 @@ alter table contact_submissions add constraint contact_submissions_email_length 
 alter table contact_submissions drop constraint if exists contact_submissions_message_length;
 alter table contact_submissions add constraint contact_submissions_message_length check (char_length(message) between 1 and 5000);
 
+-- `authenticated` is included too so a signed-in admin testing the form
+-- (or any logged-in visitor) isn't blocked — Supabase's client sends the
+-- session's role automatically, not just the anon key, whenever one exists.
 drop policy if exists "Allow public inserts" on contact_submissions;
 create policy "Allow public inserts"
   on contact_submissions
   for insert
-  to anon
+  to anon, authenticated
   with check (true);
 
 drop policy if exists "Allow authenticated read" on contact_submissions;
