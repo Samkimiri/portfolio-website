@@ -13,7 +13,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
   const accent = accentClasses[project.accent];
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-colors hover:border-neutral-300 dark:border-neutral-800 dark:bg-neutral-900/50 dark:hover:border-neutral-700">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all duration-300 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/5 dark:border-neutral-800 dark:bg-neutral-900/50 dark:hover:border-emerald-500/30">
       <button type="button" onClick={() => onOpen(project)} className="block aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
         <BrowserFrame url={project.liveUrl}>
           {project.screenshot ? (
@@ -21,7 +21,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
               src={project.screenshot}
               alt={`${project.name} screenshot`}
               loading="lazy"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
             <span className="flex h-full items-center justify-center gap-2 text-sm text-neutral-400 dark:text-neutral-600">

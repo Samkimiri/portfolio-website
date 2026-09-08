@@ -25,10 +25,24 @@ export default function Hero() {
   };
 
   return (
-    <section id="top" className="relative overflow-hidden pt-40 pb-24 px-6">
+    <section id="top" className="relative overflow-hidden pt-40 pb-28 px-6">
       <div
         aria-hidden
         className="bg-grid pointer-events-none absolute inset-0 text-neutral-900/[0.04] [mask-image:linear-gradient(to_bottom,black,transparent)] dark:text-white/[0.04]"
+      />
+
+      {/* Ambient gradient orbs — pure CSS/decorative, respects reduced motion */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-emerald-500/20 blur-[110px] dark:bg-emerald-500/15"
+        animate={reduceMotion ? undefined : { y: [0, 24, 0], x: [0, -16, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute top-40 left-[-8%] h-[360px] w-[360px] rounded-full bg-sky-500/15 blur-[100px] dark:bg-sky-500/10"
+        animate={reduceMotion ? undefined : { y: [0, -20, 0], x: [0, 14, 0] }}
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <motion.div
@@ -37,13 +51,26 @@ export default function Hero() {
         initial="hidden"
         animate="show"
       >
+        <motion.div
+          variants={item}
+          className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white/60 px-3.5 py-1.5 text-xs font-medium text-neutral-600 backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/60 dark:text-neutral-400"
+        >
+          <span className="relative flex h-2 w-2">
+            {!reduceMotion && (
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            )}
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+          </span>
+          {profile.location}
+        </motion.div>
+
         <motion.p variants={item} className="mb-4 font-medium text-emerald-600 dark:text-emerald-400">
           {profile.role}
         </motion.p>
 
         <motion.h1
           variants={item}
-          className="max-w-3xl text-4xl font-bold tracking-tight text-neutral-950 sm:text-6xl dark:text-neutral-50"
+          className="max-w-3xl bg-gradient-to-br from-neutral-950 to-neutral-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-6xl dark:from-neutral-50 dark:to-neutral-400"
         >
           {profile.name}
         </motion.h1>
@@ -57,7 +84,7 @@ export default function Hero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
             href="#projects"
-            className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-medium text-neutral-950 transition-colors hover:bg-emerald-400"
+            className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-medium text-neutral-950 shadow-lg shadow-emerald-500/25 transition-colors hover:bg-emerald-400 hover:shadow-emerald-500/40"
           >
             View Projects
             <ArrowRight size={16} />
@@ -66,7 +93,7 @@ export default function Hero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
             href="#contact"
-            className="inline-flex items-center rounded-full border border-neutral-300 px-6 py-3 text-sm font-medium text-neutral-800 transition-colors hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-neutral-500"
+            className="inline-flex items-center rounded-full border border-neutral-300 px-6 py-3 text-sm font-medium text-neutral-800 transition-colors hover:border-emerald-500/50 hover:text-emerald-700 dark:border-neutral-700 dark:text-neutral-200 dark:hover:border-emerald-400/50 dark:hover:text-emerald-400"
           >
             Contact Me
           </motion.a>

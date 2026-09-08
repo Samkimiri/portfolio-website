@@ -4,6 +4,7 @@ import { useSiteData } from "../context/SiteDataContext";
 import { supabase } from "../lib/supabase";
 import { GithubIcon, LinkedinIcon, WhatsappIcon } from "./icons";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -65,10 +66,11 @@ export default function Contact() {
     <section id="contact" className="border-t border-neutral-200 px-6 py-24 dark:border-neutral-900">
       <div className="mx-auto max-w-5xl">
         <Reveal>
-          <h2 className="font-display text-2xl font-bold text-neutral-950 dark:text-neutral-50">Get in touch</h2>
-          <p className="mt-2 max-w-xl text-neutral-600 dark:text-neutral-400">
-            Have a project in mind or just want to say hi? My inbox is open.
-          </p>
+          <SectionHeading
+            eyebrow="05 · Contact"
+            title="Get in touch"
+            description="Have a project in mind or just want to say hi? My inbox is open."
+          />
         </Reveal>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-2">

@@ -1,5 +1,6 @@
 import { useSiteData } from "../context/SiteDataContext";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 export default function About() {
   const { profile } = useSiteData();
@@ -7,7 +8,7 @@ export default function About() {
     <section id="about" className="border-t border-neutral-200 px-6 py-24 dark:border-neutral-900">
       <div className="mx-auto max-w-5xl">
         <Reveal>
-          <h2 className="font-display text-2xl font-bold text-neutral-950 dark:text-neutral-50">About</h2>
+          <SectionHeading eyebrow="01 · About" title="About" />
           <div className="mt-6 max-w-2xl space-y-4 text-neutral-600 dark:text-neutral-400">
             {profile.about.map((paragraph) => (
               <p key={paragraph.slice(0, 24)} className="leading-relaxed">

@@ -39,8 +39,13 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        <a href="#top" className="font-display font-semibold tracking-tight">
-          {profile.shortName}
+        <a href="#top" className="group flex flex-col leading-none">
+          <span className="font-display font-semibold tracking-tight text-neutral-950 dark:text-neutral-50">
+            {profile.shortName}
+          </span>
+          <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-emerald-600 transition-colors group-hover:text-emerald-500 dark:text-emerald-400">
+            Portfolio
+          </span>
         </a>
 
         <ul className="hidden items-center gap-6 text-sm text-neutral-600 dark:text-neutral-400 md:flex">

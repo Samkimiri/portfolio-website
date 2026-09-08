@@ -5,6 +5,7 @@ import type { Project } from "../types";
 import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 import Reveal from "./Reveal";
+import SectionHeading from "./SectionHeading";
 
 // Only tags shared by more than one project become filters — otherwise a
 // site with lots of one-off tech tags ends up with a wall of filters that
@@ -51,10 +52,11 @@ export default function Projects() {
     <section id="projects" className="border-t border-neutral-200 px-6 py-24 dark:border-neutral-900">
       <div className="mx-auto max-w-5xl">
         <Reveal>
-          <h2 className="font-display text-2xl font-bold text-neutral-950 dark:text-neutral-50">Projects</h2>
-          <p className="mt-2 text-neutral-600 dark:text-neutral-400">
-            Products I&apos;ve built and shipped for real users, not demos.
-          </p>
+          <SectionHeading
+            eyebrow="03 · Projects"
+            title="Projects"
+            description="Products I've built and shipped for real users, not demos."
+          />
         </Reveal>
 
         {filters.length > 0 && (
