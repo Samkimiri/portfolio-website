@@ -85,15 +85,6 @@ export default function ProfileEditor() {
             onChange={(e) => update("tagline", e.target.value)}
           />
         </div>
-
-        <div className="mt-4">
-          <label className={labelClasses}>Resume URL (leave blank to hide the download button)</label>
-          <input
-            className={inputClasses}
-            value={form.resumeUrl ?? ""}
-            onChange={(e) => update("resumeUrl", e.target.value || null)}
-          />
-        </div>
       </div>
 
       <div className={cardClasses}>

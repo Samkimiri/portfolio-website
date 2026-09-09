@@ -15,7 +15,6 @@ export interface Profile {
   tagline: string;
   location: string;
   about: string[];
-  resumeUrl: string | null;
   social: SocialLinks;
 }
 

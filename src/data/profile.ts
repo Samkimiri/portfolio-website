@@ -1,7 +1,5 @@
 import type { Profile } from "../types";
 
-const resumeUrl: string | null = "/resume.pdf";
-
 export const profile: Profile = {
   name: "Samuel Ndung'u Kimiri",
   shortName: "Sam Kimiri",
@@ -14,7 +12,6 @@ export const profile: Profile = {
     "Today I build fullstack products, mostly fintech and AI-driven tools aimed at real markets rather than demos. Under Imara Capital I'm building microloan and AI lending infrastructure for informal-sector traders in Kenya. Alongside that, I run Sam Creative Design School (SCDS), an online creative and technical training institution where I've also taught, and Sam Creative Graphics, a brand design agency.",
     "What I care about is shipping things people actually use: payments that clear, dashboards that hold up under real data, and interfaces that don't fall over on a mid-range Android phone on a patchy connection.",
   ],
-  resumeUrl,
   social: {
     github: "https://github.com/Samkimiri",
     linkedin: "https://linkedin.com/in/samuel-ndung-u-kimiri-a85a41267",

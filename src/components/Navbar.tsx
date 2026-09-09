@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useSiteData } from "../context/SiteDataContext";
 import ThemeToggle from "./ThemeToggle";
 
@@ -60,15 +61,12 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-4 md:flex">
           <ThemeToggle />
-          {profile.resumeUrl && (
-            <a
-              href={profile.resumeUrl}
-              download
-              className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-neutral-950 transition-colors hover:bg-emerald-400"
-            >
-              Download Resume
-            </a>
-          )}
+          <Link
+            to="/resume"
+            className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-neutral-950 transition-colors hover:bg-emerald-400"
+          >
+            Resume
+          </Link>
         </div>
 
         <div className="flex items-center gap-3 md:hidden">
@@ -106,17 +104,15 @@ export default function Navbar() {
                   </a>
                 </li>
               ))}
-              {profile.resumeUrl && (
-                <li className="pt-2">
-                  <a
-                    href={profile.resumeUrl}
-                    download
-                    className="inline-flex rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-neutral-950"
-                  >
-                    Download Resume
-                  </a>
-                </li>
-              )}
+              <li className="pt-2">
+                <Link
+                  to="/resume"
+                  onClick={() => setMenuOpen(false)}
+                  className="inline-flex rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-neutral-950"
+                >
+                  Resume
+                </Link>
+              </li>
             </ul>
           </motion.div>
         )}

@@ -12,9 +12,9 @@ export const projects: Project[] = [
     description:
       "Amani helps Christians take sermon notes without losing the thread of the service, and read Scripture without needing a connection. Type a shorthand reference like \"2 Cor 5:7\" to insert the full verse instantly, backed by a complete offline KJV Bible — all 66 books, ~31,000 verses — bundled for zero-connectivity use. Notes support inline photos and share as a styled verse-card image, PDF, or plain text.",
     tags: ["React Native", "Expo", "TypeScript", "Offline-first", "In development"],
-    liveUrl: null,
+    liveUrl: "https://amani-app.vercel.app/",
     repoUrl: null,
-    screenshot: null,
+    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/amani-cover.webp",
     accent: "sky",
   },
   {

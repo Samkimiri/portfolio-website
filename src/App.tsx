@@ -9,6 +9,7 @@ import Experience from "./components/Experience";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AdminApp from "./admin/AdminApp";
+import Resume from "./components/Resume";
 import NotFound from "./components/NotFound";
 import { SiteDataProvider } from "./context/SiteDataContext";
 
@@ -34,6 +35,7 @@ export default function App() {
     <SiteDataProvider>
       <Routes>
         <Route path="/" element={<MainSite />} />
+        <Route path="/resume" element={<Resume />} />
         <Route path="/admin/*" element={<AdminApp />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
