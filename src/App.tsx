@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
@@ -12,8 +13,13 @@ import AdminApp from "./admin/AdminApp";
 import Resume from "./components/Resume";
 import NotFound from "./components/NotFound";
 import { SiteDataProvider } from "./context/SiteDataContext";
+import { trackPageView } from "./lib/trackView";
 
 function MainSite() {
+  useEffect(() => {
+    trackPageView("/");
+  }, []);
+
   return (
     <div className="min-h-screen bg-white dark:bg-neutral-950">
       <Navbar />

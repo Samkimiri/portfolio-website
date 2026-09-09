@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Download, ArrowLeft } from "lucide-react";
 import { useSiteData } from "../context/SiteDataContext";
 import { GithubIcon, LinkedinIcon } from "./icons";
+import { trackPageView } from "../lib/trackView";
 
 // Rendered live from the same site_content that /admin edits — this page
 // (and anything printed/saved from it) is always in sync with the actual
@@ -11,6 +13,10 @@ const MAX_FEATURED_PROJECTS = 5;
 export default function Resume() {
   const { profile, skillGroups, experience, projects } = useSiteData();
   const featuredProjects = projects.slice(0, MAX_FEATURED_PROJECTS);
+
+  useEffect(() => {
+    trackPageView("/resume");
+  }, []);
 
   return (
     <div className="min-h-screen bg-neutral-100 py-10 print:bg-white print:py-0">

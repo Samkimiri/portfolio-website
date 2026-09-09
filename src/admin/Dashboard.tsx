@@ -8,8 +8,9 @@ import SkillsEditor from "./SkillsEditor";
 import ExperienceEditor from "./ExperienceEditor";
 import ProjectsEditor from "./ProjectsEditor";
 import MessagesEditor from "./MessagesEditor";
+import AnalyticsTab from "./AnalyticsTab";
 
-type Tab = "profile" | "skills" | "experience" | "projects" | "messages";
+type Tab = "profile" | "skills" | "experience" | "projects" | "messages" | "analytics";
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "projects", label: "Projects" },
@@ -17,6 +18,7 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "messages", label: "Messages" },
+  { id: "analytics", label: "Analytics" },
 ];
 
 export default function Dashboard() {
@@ -103,6 +105,8 @@ export default function Dashboard() {
 
         {tab === "messages" ? (
           <MessagesEditor />
+        ) : tab === "analytics" ? (
+          <AnalyticsTab />
         ) : loading ? (
           <p className="text-sm text-neutral-500 dark:text-neutral-400">Loading content…</p>
         ) : (

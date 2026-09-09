@@ -187,3 +187,34 @@ for each row execute function supabase_functions.http_request(
   '{}',
   '5000'
 );
+
+-- =====================================================================
+-- page_views — lightweight, privacy-conscious visit tracking for the
+-- Analytics tab in /admin. Deliberately minimal: just which page and
+-- which browser, no IP addresses, no user-agent fingerprinting, no way
+-- to identify who a visitor actually is. Anyone can write (it fires on
+-- every page load); only the signed-in admin can read the results back.
+-- =====================================================================
+
+create table if not exists page_views (
+  id uuid primary key default gen_random_uuid(),
+  path text not null,
+  browser text not null,
+  created_at timestamptz not null default now()
+);
+
+alter table page_views enable row level security;
+
+drop policy if exists "Allow public inserts" on page_views;
+create policy "Allow public inserts"
+  on page_views
+  for insert
+  to anon, authenticated
+  with check (true);
+
+drop policy if exists "Allow authenticated read" on page_views;
+create policy "Allow authenticated read"
+  on page_views
+  for select
+  to authenticated
+  using (true);
