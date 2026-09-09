@@ -6,11 +6,23 @@ import type { Project } from "../types";
 // truth and this file stops being read — edit content there instead.
 export const projects: Project[] = [
   {
+    id: "amani",
+    name: "Amani",
+    tagline: "Sermon notes and Scripture, together, offline-first",
+    description:
+      "Amani helps Christians take sermon notes without losing the thread of the service, and read Scripture without needing a connection. Type a shorthand reference like \"2 Cor 5:7\" to insert the full verse instantly, backed by a complete offline KJV Bible — all 66 books, ~31,000 verses — bundled for zero-connectivity use. Notes support inline photos and share as a styled verse-card image, PDF, or plain text.",
+    tags: ["React Native", "Expo", "TypeScript", "Offline-first", "In development"],
+    liveUrl: null,
+    repoUrl: null,
+    screenshot: null,
+    accent: "sky",
+  },
+  {
     id: "renziy",
     name: "Renziy",
     tagline: "Rent, managed.",
     description:
-      "A Kenya-first property management app that gives landlords and tenants a shared, transparent way to handle rent. Payments run through M-Pesa integration on a Supabase backend, deployed on Vercel and Netlify.",
+      "Renziy (formerly Rentza) is a Kenya-first platform aimed at the house-hunting problem — helping tenants actually find and secure a place to live, not just manage one they're already renting. Landlords and tenants share one transparent system for listings, M-Pesa rent payments, and records, built on a full Supabase relational schema and deployed on Vercel and Netlify.",
     tags: ["React", "Supabase", "M-Pesa", "Vercel", "Netlify"],
     liveUrl: "https://renziy-gkni.vercel.app/",
     repoUrl: null,
