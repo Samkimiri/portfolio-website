@@ -55,7 +55,7 @@ export default function Contact({ eyebrow = "05 · Contact" }: ContactProps) {
       setErrorMessage(
         error.message.toLowerCase().includes("too many messages")
           ? error.message
-          : "Something went wrong on our end. Please try again in a moment, or email me directly.",
+          : "Something went wrong on our end. Please try again in a moment, or email us directly.",
       );
       return;
     }
@@ -73,7 +73,7 @@ export default function Contact({ eyebrow = "05 · Contact" }: ContactProps) {
           <SectionHeading
             eyebrow={eyebrow}
             title="Get in touch"
-            description="Have a project in mind or just want to say hi? My inbox is open."
+            description="Have a project in mind? We'd love to hear about it."
           />
         </Reveal>
 
@@ -158,7 +158,7 @@ export default function Contact({ eyebrow = "05 · Contact" }: ContactProps) {
               <div aria-live="polite" className="min-h-[1.5rem] text-sm">
                 {!configured && (
                   <p className="text-amber-600 dark:text-amber-400">
-                    Submissions aren&apos;t connected yet (Supabase env vars aren&apos;t set) — email me directly instead for
+                    Submissions aren&apos;t connected yet (Supabase env vars aren&apos;t set) — email us directly instead for
                     now. Once <code className="font-mono text-xs">VITE_SUPABASE_URL</code> /{" "}
                     <code className="font-mono text-xs">VITE_SUPABASE_ANON_KEY</code> are set, this form writes
                     straight to the database.
@@ -166,7 +166,7 @@ export default function Contact({ eyebrow = "05 · Contact" }: ContactProps) {
                 )}
                 {status === "success" && (
                   <p className="text-amber-700 dark:text-amber-400">
-                    Thanks — your message was saved. I&apos;ll get back to you soon.
+                    Thanks — your message was saved. We&apos;ll get back to you soon.
                   </p>
                 )}
                 {status === "error" && <p className="text-red-600 dark:text-red-400">Something went wrong: {errorMessage}</p>}
@@ -179,7 +179,7 @@ export default function Contact({ eyebrow = "05 · Contact" }: ContactProps) {
               {profile.social.whatsapp && (
                 <a
                   href={`https://wa.me/${profile.social.whatsapp}?text=${encodeURIComponent(
-                    `Hi ${profile.shortName}, I found your portfolio and I'd like to chat.`,
+                    `Hi, I'd like to get in touch about a project with ${profile.brandName}.`,
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -187,7 +187,7 @@ export default function Contact({ eyebrow = "05 · Contact" }: ContactProps) {
                 >
                   <WhatsappIcon size={18} className="text-amber-700 dark:text-amber-400" />
                   <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Chat on WhatsApp — usually the fastest way to reach me
+                    Chat on WhatsApp — usually the fastest way to reach us
                   </span>
                 </a>
               )}

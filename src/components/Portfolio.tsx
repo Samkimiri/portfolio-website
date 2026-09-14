@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft, Check, Link as LinkIcon, Mail } from "lucide-react";
 import { useSiteData } from "../context/SiteDataContext";
 import { trackPageView } from "../lib/trackView";
 import { GithubIcon, LinkedinIcon, WhatsappIcon } from "./icons";
@@ -15,15 +15,27 @@ import Footer from "./Footer";
 // client or employer) without the surrounding company framing.
 export default function Portfolio() {
   const { profile } = useSiteData();
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     trackPageView("/portfolio");
   }, []);
 
+  async function handleCopyLink() {
+    try {
+      await navigator.clipboard.writeText(window.location.origin + "/portfolio");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Clipboard API can be unavailable (older browsers, insecure context);
+      // the URL is still visible in the address bar either way.
+    }
+  }
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950">
       <header className="border-b border-slate-200 px-6 py-4 dark:border-slate-900">
-        <div className="mx-auto flex max-w-5xl items-center justify-between">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-3">
           <Link
             to="/"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
@@ -31,12 +43,22 @@ export default function Portfolio() {
             <ArrowLeft size={16} />
             Back to Stackfen
           </Link>
-          <Link
-            to="/resume"
-            className="rounded-full border border-slate-300 px-4 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:border-amber-600/50 hover:text-amber-700 dark:border-slate-700 dark:text-slate-300 dark:hover:border-amber-400/50 dark:hover:text-amber-400"
-          >
-            View Resume
-          </Link>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-300 px-4 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:border-amber-600/50 hover:text-amber-700 dark:border-slate-700 dark:text-slate-300 dark:hover:border-amber-400/50 dark:hover:text-amber-400"
+            >
+              {copied ? <Check size={14} /> : <LinkIcon size={14} />}
+              {copied ? "Link copied" : "Copy link to share"}
+            </button>
+            <Link
+              to="/resume"
+              className="rounded-full border border-slate-300 px-4 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:border-amber-600/50 hover:text-amber-700 dark:border-slate-700 dark:text-slate-300 dark:hover:border-amber-400/50 dark:hover:text-amber-400"
+            >
+              View Resume
+            </Link>
+          </div>
         </div>
       </header>
 

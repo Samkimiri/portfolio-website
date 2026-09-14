@@ -171,6 +171,13 @@ create policy "Authenticated delete project screenshots"
 -- supabase/functions/notify-contact) whenever a new contact_submissions
 -- row is inserted, which emails the site owner via Resend.
 --
+-- Built directly on pg_net rather than the `supabase_functions` schema
+-- that the Dashboard's "Database Webhooks" UI relies on — that schema is
+-- only provisioned the first time you create a webhook through that UI,
+-- and was never present on this project since the trigger was always
+-- created via SQL. pg_net is a plain, self-enablable extension, so this
+-- version doesn't depend on Dashboard-only provisioning.
+--
 -- DO NOT paste this as-is: replace YOUR_WEBHOOK_SECRET with the actual
 -- value set via `supabase secrets set WEBHOOK_SECRET=...` for this
 -- project. This file is public — the real secret must never be committed,
@@ -178,15 +185,23 @@ create policy "Authenticated delete project screenshots"
 -- trigger.
 -- =====================================================================
 
-create or replace trigger "notify_contact_submission"
+create extension if not exists pg_net with schema extensions;
+
+create or replace function public.notify_contact_submission_fn() returns trigger as $$
+begin
+  perform net.http_post(
+    url := 'https://vhhfxcibpqjbulxohcxv.supabase.co/functions/v1/notify-contact',
+    body := jsonb_build_object('type', 'INSERT', 'table', 'contact_submissions', 'record', to_jsonb(new)),
+    headers := jsonb_build_object('Content-Type', 'application/json', 'x-webhook-secret', 'YOUR_WEBHOOK_SECRET')
+  );
+  return new;
+end;
+$$ language plpgsql security definer set search_path = public, net;
+
+drop trigger if exists notify_contact_submission on public.contact_submissions;
+create trigger notify_contact_submission
 after insert on public.contact_submissions
-for each row execute function supabase_functions.http_request(
-  'https://vhhfxcibpqjbulxohcxv.supabase.co/functions/v1/notify-contact',
-  'POST',
-  '{"Content-type":"application/json","x-webhook-secret":"YOUR_WEBHOOK_SECRET"}',
-  '{}',
-  '5000'
-);
+for each row execute function public.notify_contact_submission_fn();
 
 -- =====================================================================
 -- page_views — lightweight, privacy-conscious visit tracking for the
