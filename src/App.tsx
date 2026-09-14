@@ -1,8 +1,9 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import IntroAnimation from "./components/IntroAnimation";
 import Services from "./components/Services";
 import About from "./components/About";
 import Projects from "./components/Projects";
@@ -30,13 +31,46 @@ function RouteFallback() {
   );
 }
 
+const INTRO_SESSION_KEY = "stackfen-intro-seen";
+
+function hasSeenIntro(): boolean {
+  try {
+    return sessionStorage.getItem(INTRO_SESSION_KEY) === "1";
+  } catch {
+    return true; // sessionStorage unavailable (private mode, etc.) — skip rather than risk a loop.
+  }
+}
+
+function markIntroSeen() {
+  try {
+    sessionStorage.setItem(INTRO_SESSION_KEY, "1");
+  } catch {
+    // Nothing to do — worst case the intro replays on the next load.
+  }
+}
+
 function MainSite() {
+  const [showIntro, setShowIntro] = useState(() => !hasSeenIntro());
+
   useEffect(() => {
     trackPageView("/");
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = showIntro ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showIntro]);
+
+  function handleIntroComplete() {
+    markIntroSeen();
+    setShowIntro(false);
+  }
+
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950">
+      {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
       <Navbar />
       <main>
         <Hero />
