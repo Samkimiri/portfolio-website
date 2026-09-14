@@ -40,12 +40,19 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
-        <a href="#top" className="group flex flex-col leading-none">
-          <span className="font-display font-semibold tracking-tight text-slate-950 dark:text-slate-50">
-            {profile.brandName}
-          </span>
-          <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-amber-700 transition-colors group-hover:text-amber-600 dark:text-amber-400">
-            {profile.brandTagline}
+        <a href="#top" className="group flex items-center gap-2.5">
+          <img
+            src="/logo-icon.png"
+            alt=""
+            className="h-8 w-8 rounded-lg border border-slate-200 shadow-sm dark:border-slate-800"
+          />
+          <span className="flex flex-col leading-none">
+            <span className="font-display font-semibold tracking-tight text-slate-950 dark:text-slate-50">
+              {profile.brandName}
+            </span>
+            <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-amber-700 transition-colors group-hover:text-amber-600 dark:text-amber-400">
+              {profile.brandTagline}
+            </span>
           </span>
         </a>
 
