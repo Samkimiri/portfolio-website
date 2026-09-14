@@ -1,5 +1,5 @@
 import { supabase } from "./supabase";
-import type { ExperienceItem, Profile, Project, SkillGroup } from "../types";
+import type { ExperienceItem, Profile, Project, SkillGroup, Testimonial } from "../types";
 
 // All editable page content lives in one `site_content` table: one row per
 // section, keyed by name, holding a JSON blob shaped like the section's
@@ -12,6 +12,7 @@ export interface SiteContent {
   skills: SkillGroup[];
   experience: ExperienceItem[];
   projects: Project[];
+  testimonials: Testimonial[];
 }
 
 export type SiteContentKey = keyof SiteContent;

@@ -6,6 +6,7 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 import About from "./components/About";
 import Projects from "./components/Projects";
+import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { SiteDataProvider } from "./context/SiteDataContext";
@@ -42,7 +43,8 @@ function MainSite() {
         <Services />
         <About />
         <Projects eyebrow="03 · Projects" />
-        <Contact eyebrow="04 · Contact" />
+        <Testimonials eyebrow="04 · Testimonials" />
+        <Contact eyebrow="05 · Contact" />
       </main>
       <Footer />
     </div>

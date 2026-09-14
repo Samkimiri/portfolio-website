@@ -50,3 +50,13 @@ export interface ExperienceItem {
   org: string;
   description: string;
 }
+
+export interface Testimonial {
+  id: string;
+  quote: string;
+  author: string;
+  // e.g. "Founder" — the organization, if any, is a separate field so it
+  // can be omitted for an individual client with no company affiliation.
+  role?: string;
+  organization?: string;
+}
