@@ -119,7 +119,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-yellow-600 px-4 py-2 text-slate-950 transition-colors hover:bg-yellow-400"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-amber-600 px-4 py-2 text-slate-950 transition-colors hover:bg-amber-400"
                 >
                   Live site <ExternalLink size={14} />
                 </a>

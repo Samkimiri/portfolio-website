@@ -39,7 +39,7 @@ h4 {
 }
 
 ::selection {
-  @apply bg-yellow-600/30;
+  @apply bg-amber-600/30;
 }
 
 /* Ensures the resume's dark header band actually prints/exports instead
@@ -52,5 +52,5 @@ h4 {
 }
 
 :focus-visible {
-  @apply outline-2 outline-offset-2 outline-yellow-600;
+  @apply outline-2 outline-offset-2 outline-amber-600;
 }

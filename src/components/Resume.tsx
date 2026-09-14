@@ -31,7 +31,7 @@ export default function Resume() {
         <button
           type="button"
           onClick={() => window.print()}
-          className="inline-flex items-center gap-2 rounded-full bg-yellow-600 px-5 py-2.5 text-sm font-medium text-slate-950 transition-colors hover:bg-yellow-400"
+          className="inline-flex items-center gap-2 rounded-full bg-amber-600 px-5 py-2.5 text-sm font-medium text-slate-950 transition-colors hover:bg-amber-400"
         >
           <Download size={16} />
           Download as PDF
@@ -42,7 +42,7 @@ export default function Resume() {
         {/* Header */}
         <div className="bg-slate-950 px-8 py-10 text-white sm:px-12">
           <h1 className="font-display text-3xl font-bold sm:text-4xl">{profile.name}</h1>
-          <p className="mt-1 text-lg font-medium text-yellow-400">{profile.role}</p>
+          <p className="mt-1 text-lg font-medium text-amber-400">{profile.role}</p>
           <p className="mt-4 max-w-2xl text-sm text-slate-300">{profile.tagline}</p>
 
           <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
@@ -80,7 +80,7 @@ export default function Resume() {
         <div className="grid gap-10 px-8 py-10 sm:px-12 sm:grid-cols-3">
           <div className="space-y-10 sm:col-span-2">
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">Profile</h2>
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Profile</h2>
               <div className="mt-3 space-y-3 text-sm leading-relaxed text-slate-700">
                 {profile.about.map((paragraph) => (
                   <p key={paragraph.slice(0, 24)}>{paragraph}</p>
@@ -89,7 +89,7 @@ export default function Resume() {
             </section>
 
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-amber-700">
                 Experience
               </h2>
               <div className="mt-4 space-y-6">
@@ -109,7 +109,7 @@ export default function Resume() {
             </section>
 
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-amber-700">
                 Selected Projects
               </h2>
               <div className="mt-4 space-y-5">
@@ -129,7 +129,7 @@ export default function Resume() {
 
           <div className="space-y-8">
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">Skills</h2>
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Skills</h2>
               <div className="mt-3 space-y-4">
                 {skillGroups.map((group) => (
                   <div key={group.category}>
@@ -143,7 +143,7 @@ export default function Resume() {
             </section>
 
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-amber-700">
                 Education
               </h2>
               <p className="mt-3 text-sm font-semibold text-slate-950">
@@ -155,16 +155,16 @@ export default function Resume() {
             </section>
 
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">Links</h2>
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Links</h2>
               <div className="mt-3 space-y-2 text-sm">
-                <a href="/" className="block text-yellow-700 hover:underline">
+                <a href="/" className="block text-amber-700 hover:underline">
                   Portfolio
                 </a>
                 <a
                   href={profile.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-yellow-700 hover:underline"
+                  className="block text-amber-700 hover:underline"
                 >
                   GitHub
                 </a>
@@ -172,7 +172,7 @@ export default function Resume() {
                   href={profile.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-yellow-700 hover:underline"
+                  className="block text-amber-700 hover:underline"
                 >
                   LinkedIn
                 </a>

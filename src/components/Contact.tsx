@@ -9,7 +9,7 @@ import SectionHeading from "./SectionHeading";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClasses =
-  "w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-yellow-600 focus:outline-none focus:ring-1 focus:ring-yellow-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-600";
+  "w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-amber-600 focus:outline-none focus:ring-1 focus:ring-amber-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-600";
 
 export default function Contact() {
   const { profile } = useSiteData();
@@ -142,7 +142,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={!configured || status === "submitting"}
-                className="inline-flex items-center rounded-full bg-yellow-600 px-6 py-3 text-sm font-medium text-slate-950 transition-colors hover:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex items-center rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-slate-950 transition-colors hover:bg-amber-400 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {status === "submitting" ? "Sending…" : "Send message"}
               </button>
@@ -161,7 +161,7 @@ export default function Contact() {
                   </p>
                 )}
                 {status === "success" && (
-                  <p className="text-yellow-700 dark:text-yellow-400">
+                  <p className="text-amber-700 dark:text-amber-400">
                     Thanks — your message was saved. I&apos;ll get back to you soon.
                   </p>
                 )}
@@ -179,9 +179,9 @@ export default function Contact() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-xl border border-yellow-600/50 bg-yellow-600/5 p-4 transition-colors hover:border-yellow-600"
+                  className="flex items-center gap-3 rounded-xl border border-amber-600/50 bg-amber-600/5 p-4 transition-colors hover:border-amber-600"
                 >
-                  <WhatsappIcon size={18} className="text-yellow-700 dark:text-yellow-400" />
+                  <WhatsappIcon size={18} className="text-amber-700 dark:text-amber-400" />
                   <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Chat on WhatsApp — usually the fastest way to reach me
                   </span>
@@ -189,35 +189,35 @@ export default function Contact() {
               )}
               <a
                 href={`mailto:${profile.social.email}`}
-                className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-yellow-600/50 dark:border-slate-800"
+                className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-amber-600/50 dark:border-slate-800"
               >
-                <Mail size={18} className="text-yellow-700 dark:text-yellow-400" />
+                <Mail size={18} className="text-amber-700 dark:text-amber-400" />
                 <span className="text-sm text-slate-700 dark:text-slate-300">{profile.social.email}</span>
               </a>
               <a
                 href={profile.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-yellow-600/50 dark:border-slate-800"
+                className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-amber-600/50 dark:border-slate-800"
               >
-                <GithubIcon size={18} className="text-yellow-700 dark:text-yellow-400" />
+                <GithubIcon size={18} className="text-amber-700 dark:text-amber-400" />
                 <span className="text-sm text-slate-700 dark:text-slate-300">github.com/Samkimiri</span>
               </a>
               <a
                 href={profile.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-yellow-600/50 dark:border-slate-800"
+                className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-amber-600/50 dark:border-slate-800"
               >
-                <LinkedinIcon size={18} className="text-yellow-700 dark:text-yellow-400" />
+                <LinkedinIcon size={18} className="text-amber-700 dark:text-amber-400" />
                 <span className="text-sm text-slate-700 dark:text-slate-300">LinkedIn</span>
               </a>
               {profile.social.phone && (
                 <a
                   href={`tel:${profile.social.phone}`}
-                  className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-yellow-600/50 dark:border-slate-800"
+                  className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-amber-600/50 dark:border-slate-800"
                 >
-                  <Phone size={18} className="text-yellow-700 dark:text-yellow-400" />
+                  <Phone size={18} className="text-amber-700 dark:text-amber-400" />
                   <span className="text-sm text-slate-700 dark:text-slate-300">{profile.social.phone}</span>
                 </a>
               )}

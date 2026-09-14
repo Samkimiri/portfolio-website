@@ -34,7 +34,7 @@ export default function Hero() {
       {/* Ambient gradient orbs — pure CSS/decorative, respects reduced motion */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-yellow-600/20 blur-[110px] dark:bg-yellow-600/15"
+        className="pointer-events-none absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-amber-600/20 blur-[110px] dark:bg-amber-600/15"
         animate={reduceMotion ? undefined : { y: [0, 24, 0], x: [0, -16, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -57,14 +57,14 @@ export default function Hero() {
         >
           <span className="relative flex h-2 w-2">
             {!reduceMotion && (
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-yellow-500 opacity-75" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-500 opacity-75" />
             )}
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-yellow-600" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-600" />
           </span>
           {profile.location}
         </motion.div>
 
-        <motion.p variants={item} className="mb-4 font-medium text-yellow-700 dark:text-yellow-400">
+        <motion.p variants={item} className="mb-4 font-medium text-amber-700 dark:text-amber-400">
           {profile.brandTagline}
         </motion.p>
 
@@ -88,7 +88,7 @@ export default function Hero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
             href="#projects"
-            className="inline-flex items-center gap-2 rounded-full bg-yellow-600 px-6 py-3 text-sm font-medium text-slate-950 shadow-lg shadow-yellow-600/25 transition-colors hover:bg-yellow-500 hover:shadow-yellow-600/40"
+            className="inline-flex items-center gap-2 rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-slate-950 shadow-lg shadow-amber-600/25 transition-colors hover:bg-amber-500 hover:shadow-amber-600/40"
           >
             View Projects
             <ArrowRight size={16} />
@@ -97,7 +97,7 @@ export default function Hero() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
             href="#contact"
-            className="inline-flex items-center rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-slate-800 transition-colors hover:border-yellow-600/50 hover:text-yellow-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-yellow-400/50 dark:hover:text-yellow-400"
+            className="inline-flex items-center rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-slate-800 transition-colors hover:border-amber-600/50 hover:text-amber-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-amber-400/50 dark:hover:text-amber-400"
           >
             Contact Me
           </motion.a>
@@ -110,7 +110,7 @@ export default function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
-              className="transition-colors hover:text-yellow-700 dark:hover:text-yellow-400"
+              className="transition-colors hover:text-amber-700 dark:hover:text-amber-400"
             >
               <WhatsappIcon size={20} />
             </a>

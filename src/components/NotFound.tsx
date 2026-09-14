@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-6 text-center dark:bg-slate-950">
-      <p className="font-display text-sm font-semibold uppercase tracking-wide text-yellow-700 dark:text-yellow-400">
+      <p className="font-display text-sm font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400">
         404
       </p>
       <h1 className="font-display text-3xl font-bold text-slate-950 dark:text-slate-50">Page not found</h1>
@@ -12,7 +12,7 @@ export default function NotFound() {
       </p>
       <Link
         to="/"
-        className="mt-4 inline-flex items-center rounded-full bg-yellow-600 px-6 py-3 text-sm font-medium text-slate-950 transition-colors hover:bg-yellow-400"
+        className="mt-4 inline-flex items-center rounded-full bg-amber-600 px-6 py-3 text-sm font-medium text-slate-950 transition-colors hover:bg-amber-400"
       >
         Back to home
       </Link>

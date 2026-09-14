@@ -19,8 +19,8 @@ export default function Experience() {
           {experience.map((item, index) => (
             <Reveal key={item.id} delay={index * 0.06} y={16}>
               <li className="relative">
-                <span className="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full bg-yellow-600 ring-4 ring-yellow-600/15" />
-                <p className="text-xs font-semibold uppercase tracking-wide text-yellow-700 dark:text-yellow-400">
+                <span className="absolute -left-[calc(2rem+5px)] top-1.5 h-2.5 w-2.5 rounded-full bg-amber-600 ring-4 ring-amber-600/15" />
+                <p className="text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400">
                   {item.period}
                 </p>
                 <h3 className="mt-1 font-display text-lg font-semibold text-slate-950 dark:text-slate-50">

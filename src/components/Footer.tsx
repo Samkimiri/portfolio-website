@@ -15,7 +15,7 @@ export default function Footer() {
             href={profile.social.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-yellow-700 dark:hover:text-yellow-400"
+            className="transition-colors hover:text-amber-700 dark:hover:text-amber-400"
           >
             GitHub
           </a>
@@ -23,13 +23,13 @@ export default function Footer() {
             href={profile.social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-yellow-700 dark:hover:text-yellow-400"
+            className="transition-colors hover:text-amber-700 dark:hover:text-amber-400"
           >
             LinkedIn
           </a>
           <a
             href={`mailto:${profile.social.email}`}
-            className="transition-colors hover:text-yellow-700 dark:hover:text-yellow-400"
+            className="transition-colors hover:text-amber-700 dark:hover:text-amber-400"
           >
             Email
           </a>

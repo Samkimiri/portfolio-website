@@ -67,7 +67,7 @@ export default function Projects() {
                 onClick={() => setFilter(null)}
                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                   filter === null
-                    ? "bg-yellow-600 text-slate-950"
+                    ? "bg-amber-600 text-slate-950"
                     : "border border-slate-300 text-slate-600 hover:border-slate-400 dark:border-slate-700 dark:text-slate-400"
                 }`}
               >
@@ -80,7 +80,7 @@ export default function Projects() {
                   onClick={() => setFilter(tag)}
                   className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                     filter === tag
-                      ? "bg-yellow-600 text-slate-950"
+                      ? "bg-amber-600 text-slate-950"
                       : "border border-slate-300 text-slate-600 hover:border-slate-400 dark:border-slate-700 dark:text-slate-400"
                   }`}
                 >

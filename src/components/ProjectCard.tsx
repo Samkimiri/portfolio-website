@@ -13,7 +13,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
   const accent = accentClasses[project.accent];
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-yellow-600/40 hover:shadow-xl hover:shadow-yellow-600/5 dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-yellow-600/30">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-amber-600/40 hover:shadow-xl hover:shadow-amber-600/5 dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-amber-600/30">
       <button type="button" onClick={() => onOpen(project)} className="block aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
         <BrowserFrame url={project.liveUrl}>
           {project.screenshot ? (
@@ -63,7 +63,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-yellow-700 transition-colors hover:text-yellow-600 dark:text-yellow-400"
+              className="inline-flex items-center gap-1 text-amber-700 transition-colors hover:text-amber-600 dark:text-amber-400"
             >
               Live site <ExternalLink size={14} />
             </a>

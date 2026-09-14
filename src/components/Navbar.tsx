@@ -44,7 +44,7 @@ export default function Navbar() {
           <span className="font-display font-semibold tracking-tight text-slate-950 dark:text-slate-50">
             {profile.brandName}
           </span>
-          <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-yellow-700 transition-colors group-hover:text-yellow-600 dark:text-yellow-400">
+          <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-amber-700 transition-colors group-hover:text-amber-600 dark:text-amber-400">
             {profile.brandTagline}
           </span>
         </a>
@@ -52,7 +52,7 @@ export default function Navbar() {
         <ul className="hidden items-center gap-6 text-sm text-slate-600 dark:text-slate-400 md:flex">
           {links.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="transition-colors hover:text-yellow-700 dark:hover:text-yellow-400">
+              <a href={link.href} className="transition-colors hover:text-amber-700 dark:hover:text-amber-400">
                 {link.label}
               </a>
             </li>
@@ -63,7 +63,7 @@ export default function Navbar() {
           <ThemeToggle />
           <Link
             to="/resume"
-            className="rounded-full bg-yellow-600 px-4 py-2 text-sm font-medium text-slate-950 transition-colors hover:bg-yellow-500"
+            className="rounded-full bg-amber-600 px-4 py-2 text-sm font-medium text-slate-950 transition-colors hover:bg-amber-500"
           >
             Resume
           </Link>
@@ -108,7 +108,7 @@ export default function Navbar() {
                 <Link
                   to="/resume"
                   onClick={() => setMenuOpen(false)}
-                  className="inline-flex rounded-full bg-yellow-600 px-4 py-2 text-sm font-medium text-slate-950"
+                  className="inline-flex rounded-full bg-amber-600 px-4 py-2 text-sm font-medium text-slate-950"
                 >
                   Resume
                 </Link>
