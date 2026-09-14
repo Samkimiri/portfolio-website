@@ -67,7 +67,7 @@ export default function Contact() {
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
-            eyebrow="06 · Contact"
+            eyebrow="05 · Contact"
             title="Get in touch"
             description="Have a project in mind or just want to say hi? My inbox is open."
           />

@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
 import About from "./components/About";
-import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import Contact from "./components/Contact";
@@ -29,9 +28,8 @@ function MainSite() {
         <Hero />
         <Services />
         <About />
-        <Skills />
-        <Projects />
-        <Experience />
+        <Projects eyebrow="03 · Projects" />
+        <Experience eyebrow="04 · Experience" />
         <Contact />
       </main>
       <Footer />

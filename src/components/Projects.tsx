@@ -12,7 +12,11 @@ import SectionHeading from "./SectionHeading";
 // each show a single project, which defeats the point of filtering.
 const MIN_PROJECTS_PER_FILTER = 2;
 
-export default function Projects() {
+interface ProjectsProps {
+  eyebrow?: string;
+}
+
+export default function Projects({ eyebrow = "04 · Projects" }: ProjectsProps) {
   const { projects } = useSiteData();
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [filter, setFilter] = useState<string | null>(null);
@@ -53,7 +57,7 @@ export default function Projects() {
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
-            eyebrow="04 · Projects"
+            eyebrow={eyebrow}
             title="Projects"
             description="Products I've built and shipped for real users, not demos."
           />

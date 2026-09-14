@@ -92,10 +92,10 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
+      <About variant="personal" eyebrow="01 · About" />
+      <Skills eyebrow="02 · Skills" />
+      <Projects eyebrow="03 · Projects" />
+      <Experience eyebrow="04 · Experience" />
       <Footer />
     </div>
   );

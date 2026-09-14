@@ -2,14 +2,18 @@ import { useSiteData } from "../context/SiteDataContext";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
-export default function Experience() {
+interface ExperienceProps {
+  eyebrow?: string;
+}
+
+export default function Experience({ eyebrow = "05 · Experience" }: ExperienceProps) {
   const { experience } = useSiteData();
   return (
     <section id="experience" className="border-t border-slate-200 px-6 py-24 dark:border-slate-900">
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
-            eyebrow="05 · Experience"
+            eyebrow={eyebrow}
             title="Experience"
             description="From engineering to shipping software."
           />

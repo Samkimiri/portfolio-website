@@ -21,6 +21,9 @@ export interface Profile {
   // studio brand, regardless of how the marketing site is branded.
   brandName: string;
   brandTagline: string;
+  // Company-voiced About copy for the home page (no personal narrative) —
+  // `about` above stays personal-voice, used only on /portfolio and /resume.
+  companyAbout: string[];
 }
 
 export interface SkillGroup {

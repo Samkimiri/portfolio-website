@@ -16,20 +16,20 @@ export default function ProfileEditor() {
     setSaved(false);
   }
 
-  function updateAbout(index: number, value: string) {
-    const about = [...form.about];
-    about[index] = value;
-    update("about", about);
+  function updateParagraph(field: "about" | "companyAbout", index: number, value: string) {
+    const paragraphs = [...form[field]];
+    paragraphs[index] = value;
+    update(field, paragraphs);
   }
 
-  function addAboutParagraph() {
-    update("about", [...form.about, ""]);
+  function addParagraph(field: "about" | "companyAbout") {
+    update(field, [...form[field], ""]);
   }
 
-  function removeAboutParagraph(index: number) {
+  function removeParagraph(field: "about" | "companyAbout", index: number) {
     update(
-      "about",
-      form.about.filter((_, i) => i !== index),
+      field,
+      form[field].filter((_, i) => i !== index),
     );
   }
 
@@ -117,8 +117,58 @@ export default function ProfileEditor() {
 
       <div className={cardClasses}>
         <div className="mb-3 flex items-center justify-between">
-          <h3 className="font-display text-sm font-semibold text-neutral-950 dark:text-neutral-50">About paragraphs</h3>
-          <button type="button" onClick={addAboutParagraph} className="text-xs font-medium text-emerald-600 hover:underline dark:text-emerald-400">
+          <div>
+            <h3 className="font-display text-sm font-semibold text-neutral-950 dark:text-neutral-50">
+              Company About (home page)
+            </h3>
+            <p className="text-xs text-neutral-500 dark:text-neutral-500">
+              Stackfen-voiced — no personal narrative. Shown on the home page&apos;s About section.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => addParagraph("companyAbout")}
+            className="shrink-0 text-xs font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+          >
+            + Add paragraph
+          </button>
+        </div>
+        <div className="space-y-3">
+          {form.companyAbout.map((paragraph, index) => (
+            <div key={index} className="flex gap-2">
+              <textarea
+                className={inputClasses}
+                rows={3}
+                value={paragraph}
+                onChange={(e) => updateParagraph("companyAbout", index, e.target.value)}
+              />
+              <button
+                type="button"
+                onClick={() => removeParagraph("companyAbout", index)}
+                className="shrink-0 self-start rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-500 hover:border-red-400 hover:text-red-600 dark:border-neutral-700 dark:text-neutral-400"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={cardClasses}>
+        <div className="mb-3 flex items-center justify-between">
+          <div>
+            <h3 className="font-display text-sm font-semibold text-neutral-950 dark:text-neutral-50">
+              Personal About (Portfolio &amp; Resume)
+            </h3>
+            <p className="text-xs text-neutral-500 dark:text-neutral-500">
+              Your own voice and story. Shown on /portfolio and /resume, never on the home page.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => addParagraph("about")}
+            className="shrink-0 text-xs font-medium text-emerald-600 hover:underline dark:text-emerald-400"
+          >
             + Add paragraph
           </button>
         </div>
@@ -129,11 +179,11 @@ export default function ProfileEditor() {
                 className={inputClasses}
                 rows={3}
                 value={paragraph}
-                onChange={(e) => updateAbout(index, e.target.value)}
+                onChange={(e) => updateParagraph("about", index, e.target.value)}
               />
               <button
                 type="button"
-                onClick={() => removeAboutParagraph(index)}
+                onClick={() => removeParagraph("about", index)}
                 className="shrink-0 self-start rounded-full border border-neutral-300 px-3 py-1 text-xs text-neutral-500 hover:border-red-400 hover:text-red-600 dark:border-neutral-700 dark:text-neutral-400"
               >
                 Remove

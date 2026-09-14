@@ -3,14 +3,18 @@ import { useSiteData } from "../context/SiteDataContext";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
-export default function Skills() {
+interface SkillsProps {
+  eyebrow?: string;
+}
+
+export default function Skills({ eyebrow = "03 · Skills" }: SkillsProps) {
   const { skillGroups } = useSiteData();
   return (
     <section id="skills" className="border-t border-slate-200 px-6 py-24 dark:border-slate-900">
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
-            eyebrow="03 · Skills"
+            eyebrow={eyebrow}
             title="Skills"
             description="What I build with, and what I'm building toward."
           />
