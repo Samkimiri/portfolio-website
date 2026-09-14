@@ -13,8 +13,8 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
   const accent = accentClasses[project.accent];
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all duration-300 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/5 dark:border-neutral-800 dark:bg-neutral-900/50 dark:hover:border-emerald-500/30">
-      <button type="button" onClick={() => onOpen(project)} className="block aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-yellow-600/40 hover:shadow-xl hover:shadow-yellow-600/5 dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-yellow-600/30">
+      <button type="button" onClick={() => onOpen(project)} className="block aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
         <BrowserFrame url={project.liveUrl}>
           {project.screenshot ? (
             <img
@@ -24,7 +24,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
-            <span className="flex h-full items-center justify-center gap-2 text-sm text-neutral-400 dark:text-neutral-600">
+            <span className="flex h-full items-center justify-center gap-2 text-sm text-slate-400 dark:text-slate-600">
               <ImageOff size={16} />
               [SCREENSHOT]
             </span>
@@ -34,7 +34,7 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
 
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-display text-lg font-semibold text-neutral-950 dark:text-neutral-50">
+          <h3 className="font-display text-lg font-semibold text-slate-950 dark:text-slate-50">
             {project.name}
           </h3>
           {project.tagline && (
@@ -44,13 +44,13 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
           )}
         </div>
 
-        <p className="mt-2 flex-1 text-sm text-neutral-600 dark:text-neutral-400">{project.description}</p>
+        <p className="mt-2 flex-1 text-sm text-slate-600 dark:text-slate-400">{project.description}</p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-neutral-100 px-3 py-1 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300"
+              className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300"
             >
               {tag}
             </span>
@@ -63,12 +63,12 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-emerald-600 transition-colors hover:text-emerald-500 dark:text-emerald-400"
+              className="inline-flex items-center gap-1 text-yellow-700 transition-colors hover:text-yellow-600 dark:text-yellow-400"
             >
               Live site <ExternalLink size={14} />
             </a>
           ) : (
-            <span className="text-neutral-400 dark:text-neutral-600">[LIVE LINK]</span>
+            <span className="text-slate-400 dark:text-slate-600">[LIVE LINK]</span>
           )}
 
           {project.repoUrl ? (
@@ -76,18 +76,18 @@ export default function ProjectCard({ project, onOpen }: ProjectCardProps) {
               href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-neutral-500 transition-colors hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-100"
+              className="inline-flex items-center gap-1 text-slate-500 transition-colors hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100"
             >
               <GithubIcon size={14} /> Source
             </a>
           ) : (
-            <span className="text-neutral-400 dark:text-neutral-600">[GITHUB LINK]</span>
+            <span className="text-slate-400 dark:text-slate-600">[GITHUB LINK]</span>
           )}
 
           <button
             type="button"
             onClick={() => onOpen(project)}
-            className="ml-auto text-neutral-500 underline-offset-2 transition-colors hover:text-neutral-800 hover:underline dark:text-neutral-400 dark:hover:text-neutral-100"
+            className="ml-auto text-slate-500 underline-offset-2 transition-colors hover:text-slate-800 hover:underline dark:text-slate-400 dark:hover:text-slate-100"
           >
             Details
           </button>

@@ -9,7 +9,7 @@ import SectionHeading from "./SectionHeading";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClasses =
-  "w-full rounded-lg border border-neutral-300 bg-white px-4 py-2.5 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100 dark:placeholder:text-neutral-600";
+  "w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-yellow-600 focus:outline-none focus:ring-1 focus:ring-yellow-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-600";
 
 export default function Contact() {
   const { profile } = useSiteData();
@@ -63,7 +63,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="border-t border-neutral-200 px-6 py-24 dark:border-neutral-900">
+    <section id="contact" className="border-t border-slate-200 px-6 py-24 dark:border-slate-900">
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
@@ -90,7 +90,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Name
                 </label>
                 <input
@@ -107,7 +107,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Email
                 </label>
                 <input
@@ -124,7 +124,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-300">
                   Message
                 </label>
                 <textarea
@@ -142,12 +142,12 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={!configured || status === "submitting"}
-                className="inline-flex items-center rounded-full bg-emerald-500 px-6 py-3 text-sm font-medium text-neutral-950 transition-colors hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex items-center rounded-full bg-yellow-600 px-6 py-3 text-sm font-medium text-slate-950 transition-colors hover:bg-yellow-400 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {status === "submitting" ? "Sending…" : "Send message"}
               </button>
 
-              <p className="text-xs text-neutral-400 dark:text-neutral-600">
+              <p className="text-xs text-slate-400 dark:text-slate-600">
                 Used only to reply to you — never shared or used for anything else.
               </p>
 
@@ -161,7 +161,7 @@ export default function Contact() {
                   </p>
                 )}
                 {status === "success" && (
-                  <p className="text-emerald-600 dark:text-emerald-400">
+                  <p className="text-yellow-700 dark:text-yellow-400">
                     Thanks — your message was saved. I&apos;ll get back to you soon.
                   </p>
                 )}
@@ -179,46 +179,46 @@ export default function Contact() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-xl border border-emerald-500/50 bg-emerald-500/5 p-4 transition-colors hover:border-emerald-500"
+                  className="flex items-center gap-3 rounded-xl border border-yellow-600/50 bg-yellow-600/5 p-4 transition-colors hover:border-yellow-600"
                 >
-                  <WhatsappIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
-                  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                  <WhatsappIcon size={18} className="text-yellow-700 dark:text-yellow-400" />
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
                     Chat on WhatsApp — usually the fastest way to reach me
                   </span>
                 </a>
               )}
               <a
                 href={`mailto:${profile.social.email}`}
-                className="flex items-center gap-3 rounded-xl border border-neutral-200 p-4 transition-colors hover:border-emerald-500/50 dark:border-neutral-800"
+                className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-yellow-600/50 dark:border-slate-800"
               >
-                <Mail size={18} className="text-emerald-600 dark:text-emerald-400" />
-                <span className="text-sm text-neutral-700 dark:text-neutral-300">{profile.social.email}</span>
+                <Mail size={18} className="text-yellow-700 dark:text-yellow-400" />
+                <span className="text-sm text-slate-700 dark:text-slate-300">{profile.social.email}</span>
               </a>
               <a
                 href={profile.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-xl border border-neutral-200 p-4 transition-colors hover:border-emerald-500/50 dark:border-neutral-800"
+                className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-yellow-600/50 dark:border-slate-800"
               >
-                <GithubIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
-                <span className="text-sm text-neutral-700 dark:text-neutral-300">github.com/Samkimiri</span>
+                <GithubIcon size={18} className="text-yellow-700 dark:text-yellow-400" />
+                <span className="text-sm text-slate-700 dark:text-slate-300">github.com/Samkimiri</span>
               </a>
               <a
                 href={profile.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-xl border border-neutral-200 p-4 transition-colors hover:border-emerald-500/50 dark:border-neutral-800"
+                className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-yellow-600/50 dark:border-slate-800"
               >
-                <LinkedinIcon size={18} className="text-emerald-600 dark:text-emerald-400" />
-                <span className="text-sm text-neutral-700 dark:text-neutral-300">LinkedIn</span>
+                <LinkedinIcon size={18} className="text-yellow-700 dark:text-yellow-400" />
+                <span className="text-sm text-slate-700 dark:text-slate-300">LinkedIn</span>
               </a>
               {profile.social.phone && (
                 <a
                   href={`tel:${profile.social.phone}`}
-                  className="flex items-center gap-3 rounded-xl border border-neutral-200 p-4 transition-colors hover:border-emerald-500/50 dark:border-neutral-800"
+                  className="flex items-center gap-3 rounded-xl border border-slate-200 p-4 transition-colors hover:border-yellow-600/50 dark:border-slate-800"
                 >
-                  <Phone size={18} className="text-emerald-600 dark:text-emerald-400" />
-                  <span className="text-sm text-neutral-700 dark:text-neutral-300">{profile.social.phone}</span>
+                  <Phone size={18} className="text-yellow-700 dark:text-yellow-400" />
+                  <span className="text-sm text-slate-700 dark:text-slate-300">{profile.social.phone}</span>
                 </a>
               )}
             </div>

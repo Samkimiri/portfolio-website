@@ -48,7 +48,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           <button
             type="button"
             aria-label="Close dialog"
-            className="absolute inset-0 bg-neutral-950/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -57,19 +57,19 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: reduceMotion ? 0 : 16, scale: reduceMotion ? 1 : 0.98 }}
             transition={{ duration: reduceMotion ? 0.15 : 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-neutral-200 bg-white p-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900 sm:p-8"
+            className="relative z-10 max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900 sm:p-8"
           >
             <button
               ref={closeButtonRef}
               type="button"
               onClick={onClose}
               aria-label="Close"
-              className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-100"
+              className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
             >
               <X size={16} />
             </button>
 
-            <div className="mb-6 aspect-video overflow-hidden rounded-xl bg-neutral-100 dark:bg-neutral-800">
+            <div className="mb-6 aspect-video overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800">
               <BrowserFrame url={project.liveUrl}>
                 {project.screenshot ? (
                   <img
@@ -79,7 +79,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <span className="flex h-full items-center justify-center gap-2 text-sm text-neutral-400 dark:text-neutral-600">
+                  <span className="flex h-full items-center justify-center gap-2 text-sm text-slate-400 dark:text-slate-600">
                     <ImageOff size={16} />
                     [SCREENSHOT]
                   </span>
@@ -88,7 +88,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
 
             <div className="flex items-start justify-between gap-3 pr-8">
-              <h3 id="project-modal-title" className="font-display text-2xl font-bold text-neutral-950 dark:text-neutral-50">
+              <h3 id="project-modal-title" className="font-display text-2xl font-bold text-slate-950 dark:text-slate-50">
                 {project.name}
               </h3>
               {project.tagline && (
@@ -100,31 +100,31 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               )}
             </div>
 
-            <p className="mt-4 text-neutral-600 dark:text-neutral-400">{project.description}</p>
+            <p className="mt-4 text-slate-600 dark:text-slate-400">{project.description}</p>
 
             <div className="mt-4 flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full bg-neutral-100 px-3 py-1 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300"
+                  className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-300"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            <div className="mt-6 flex items-center gap-4 border-t border-neutral-200 pt-6 text-sm font-medium dark:border-neutral-800">
+            <div className="mt-6 flex items-center gap-4 border-t border-slate-200 pt-6 text-sm font-medium dark:border-slate-800">
               {project.liveUrl ? (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2 text-neutral-950 transition-colors hover:bg-emerald-400"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-yellow-600 px-4 py-2 text-slate-950 transition-colors hover:bg-yellow-400"
                 >
                   Live site <ExternalLink size={14} />
                 </a>
               ) : (
-                <span className="rounded-full border border-neutral-200 px-4 py-2 text-neutral-400 dark:border-neutral-800 dark:text-neutral-600">
+                <span className="rounded-full border border-slate-200 px-4 py-2 text-slate-400 dark:border-slate-800 dark:text-slate-600">
                   [LIVE LINK]
                 </span>
               )}
@@ -134,12 +134,12 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 px-4 py-2 text-neutral-700 transition-colors hover:border-neutral-300 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-700"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-4 py-2 text-slate-700 transition-colors hover:border-slate-300 dark:border-slate-800 dark:text-slate-300 dark:hover:border-slate-700"
                 >
                   <GithubIcon size={14} /> Source
                 </a>
               ) : (
-                <span className="rounded-full border border-neutral-200 px-4 py-2 text-neutral-400 dark:border-neutral-800 dark:text-neutral-600">
+                <span className="rounded-full border border-slate-200 px-4 py-2 text-slate-400 dark:border-slate-800 dark:text-slate-600">
                   [GITHUB LINK]
                 </span>
               )}

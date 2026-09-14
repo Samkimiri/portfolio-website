@@ -19,12 +19,12 @@ export default function BrowserFrame({ url, children }: BrowserFrameProps) {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex shrink-0 items-center gap-1.5 bg-neutral-200/80 px-3 py-2 dark:bg-neutral-800/80">
+      <div className="flex shrink-0 items-center gap-1.5 bg-slate-200/80 px-3 py-2 dark:bg-slate-800/80">
         <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
         <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
         {hostname && (
-          <span className="ml-2 truncate rounded-full bg-white/80 px-2.5 py-0.5 text-[10px] text-neutral-500 dark:bg-neutral-900/60 dark:text-neutral-400">
+          <span className="ml-2 truncate rounded-full bg-white/80 px-2.5 py-0.5 text-[10px] text-slate-500 dark:bg-slate-900/60 dark:text-slate-400">
             {hostname}
           </span>
         )}

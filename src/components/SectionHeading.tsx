@@ -7,11 +7,11 @@ interface SectionHeadingProps {
 export default function SectionHeading({ eyebrow, title, description }: SectionHeadingProps) {
   return (
     <>
-      <p className="mb-3 font-display text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600 dark:text-emerald-400">
+      <p className="mb-3 font-display text-xs font-semibold uppercase tracking-[0.2em] text-yellow-700 dark:text-yellow-400">
         {eyebrow}
       </p>
-      <h2 className="font-display text-2xl font-bold text-neutral-950 sm:text-3xl dark:text-neutral-50">{title}</h2>
-      {description && <p className="mt-2 text-neutral-600 dark:text-neutral-400">{description}</p>}
+      <h2 className="font-display text-2xl font-bold text-slate-950 sm:text-3xl dark:text-slate-50">{title}</h2>
+      {description && <p className="mt-2 text-slate-600 dark:text-slate-400">{description}</p>}
     </>
   );
 }

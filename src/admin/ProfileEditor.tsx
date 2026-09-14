@@ -49,9 +49,37 @@ export default function ProfileEditor() {
   return (
     <div className="space-y-6">
       <div className={cardClasses}>
+        <h3 className="mb-3 font-display text-sm font-semibold text-neutral-950 dark:text-neutral-50">
+          Brand identity (shown on the public site)
+        </h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className={labelClasses}>Full name</label>
+            <label className={labelClasses}>Brand / studio name</label>
+            <input
+              className={inputClasses}
+              value={form.brandName}
+              onChange={(e) => update("brandName", e.target.value)}
+            />
+          </div>
+          <div>
+            <label className={labelClasses}>Brand tagline (Hero eyebrow)</label>
+            <input
+              className={inputClasses}
+              value={form.brandTagline}
+              onChange={(e) => update("brandTagline", e.target.value)}
+            />
+          </div>
+        </div>
+        <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-500">
+          This is the name shown in the Hero, Navbar, and page title — separate from your personal name below, which
+          always stays accurate on the /resume page regardless of how the site is branded.
+        </p>
+      </div>
+
+      <div className={cardClasses}>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className={labelClasses}>Full name (used on your resume)</label>
             <input className={inputClasses} value={form.name} onChange={(e) => update("name", e.target.value)} />
           </div>
           <div>

@@ -21,7 +21,7 @@ function MainSite() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen bg-white dark:bg-slate-950">
       <Navbar />
       <main>
         <Hero />

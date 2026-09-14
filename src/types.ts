@@ -16,6 +16,11 @@ export interface Profile {
   location: string;
   about: string[];
   social: SocialLinks;
+  // The public brand identity (e.g. "Stackfen") — kept separate from `name`
+  // so the personal /resume page always shows the real name, never the
+  // studio brand, regardless of how the marketing site is branded.
+  brandName: string;
+  brandTagline: string;
 }
 
 export interface SkillGroup {

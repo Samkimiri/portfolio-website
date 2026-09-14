@@ -35,24 +35,24 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors ${
         scrolled
-          ? "border-b border-neutral-200 bg-white/80 backdrop-blur dark:border-neutral-800 dark:bg-neutral-950/80"
+          ? "border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80"
           : "border-b border-transparent bg-transparent"
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <a href="#top" className="group flex flex-col leading-none">
-          <span className="font-display font-semibold tracking-tight text-neutral-950 dark:text-neutral-50">
-            {profile.shortName}
+          <span className="font-display font-semibold tracking-tight text-slate-950 dark:text-slate-50">
+            {profile.brandName}
           </span>
-          <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-emerald-600 transition-colors group-hover:text-emerald-500 dark:text-emerald-400">
-            Portfolio
+          <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-yellow-700 transition-colors group-hover:text-yellow-600 dark:text-yellow-400">
+            {profile.brandTagline}
           </span>
         </a>
 
-        <ul className="hidden items-center gap-6 text-sm text-neutral-600 dark:text-neutral-400 md:flex">
+        <ul className="hidden items-center gap-6 text-sm text-slate-600 dark:text-slate-400 md:flex">
           {links.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="transition-colors hover:text-emerald-600 dark:hover:text-emerald-400">
+              <a href={link.href} className="transition-colors hover:text-yellow-700 dark:hover:text-yellow-400">
                 {link.label}
               </a>
             </li>
@@ -63,7 +63,7 @@ export default function Navbar() {
           <ThemeToggle />
           <Link
             to="/resume"
-            className="rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-neutral-950 transition-colors hover:bg-emerald-400"
+            className="rounded-full bg-yellow-600 px-4 py-2 text-sm font-medium text-slate-950 transition-colors hover:bg-yellow-500"
           >
             Resume
           </Link>
@@ -76,7 +76,7 @@ export default function Navbar() {
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 text-neutral-700 dark:border-neutral-800 dark:text-neutral-300"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-700 dark:border-slate-800 dark:text-slate-300"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -90,7 +90,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="overflow-hidden border-b border-neutral-200 bg-white md:hidden dark:border-neutral-800 dark:bg-neutral-950"
+            className="overflow-hidden border-b border-slate-200 bg-white md:hidden dark:border-slate-800 dark:bg-slate-950"
           >
             <ul className="flex flex-col gap-1 px-6 py-4 text-sm">
               {links.map((link) => (
@@ -98,7 +98,7 @@ export default function Navbar() {
                   <a
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block rounded-lg px-2 py-2 text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-900"
+                    className="block rounded-lg px-2 py-2 text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-900"
                   >
                     {link.label}
                   </a>
@@ -108,7 +108,7 @@ export default function Navbar() {
                 <Link
                   to="/resume"
                   onClick={() => setMenuOpen(false)}
-                  className="inline-flex rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-neutral-950"
+                  className="inline-flex rounded-full bg-yellow-600 px-4 py-2 text-sm font-medium text-slate-950"
                 >
                   Resume
                 </Link>

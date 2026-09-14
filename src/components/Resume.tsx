@@ -19,11 +19,11 @@ export default function Resume() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-neutral-100 py-10 print:bg-white print:py-0">
+    <div className="min-h-screen bg-slate-100 py-10 print:bg-white print:py-0">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-6 pb-6 print:hidden">
         <Link
           to="/"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-600 hover:text-neutral-900"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-slate-900"
         >
           <ArrowLeft size={16} />
           Back to portfolio
@@ -31,7 +31,7 @@ export default function Resume() {
         <button
           type="button"
           onClick={() => window.print()}
-          className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-5 py-2.5 text-sm font-medium text-neutral-950 transition-colors hover:bg-emerald-400"
+          className="inline-flex items-center gap-2 rounded-full bg-yellow-600 px-5 py-2.5 text-sm font-medium text-slate-950 transition-colors hover:bg-yellow-400"
         >
           <Download size={16} />
           Download as PDF
@@ -40,12 +40,12 @@ export default function Resume() {
 
       <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl bg-white shadow-xl print:rounded-none print:shadow-none">
         {/* Header */}
-        <div className="bg-neutral-950 px-8 py-10 text-white sm:px-12">
+        <div className="bg-slate-950 px-8 py-10 text-white sm:px-12">
           <h1 className="font-display text-3xl font-bold sm:text-4xl">{profile.name}</h1>
-          <p className="mt-1 text-lg font-medium text-emerald-400">{profile.role}</p>
-          <p className="mt-4 max-w-2xl text-sm text-neutral-300">{profile.tagline}</p>
+          <p className="mt-1 text-lg font-medium text-yellow-400">{profile.role}</p>
+          <p className="mt-4 max-w-2xl text-sm text-slate-300">{profile.tagline}</p>
 
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-neutral-300">
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
             <span className="inline-flex items-center gap-1.5">
               <MapPin size={14} /> {profile.location}
             </span>
@@ -80,8 +80,8 @@ export default function Resume() {
         <div className="grid gap-10 px-8 py-10 sm:px-12 sm:grid-cols-3">
           <div className="space-y-10 sm:col-span-2">
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">Profile</h2>
-              <div className="mt-3 space-y-3 text-sm leading-relaxed text-neutral-700">
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">Profile</h2>
+              <div className="mt-3 space-y-3 text-sm leading-relaxed text-slate-700">
                 {profile.about.map((paragraph) => (
                   <p key={paragraph.slice(0, 24)}>{paragraph}</p>
                 ))}
@@ -89,38 +89,38 @@ export default function Resume() {
             </section>
 
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">
                 Experience
               </h2>
               <div className="mt-4 space-y-6">
                 {experience.map((item) => (
                   <div key={item.id}>
                     <div className="flex flex-wrap items-baseline justify-between gap-x-3">
-                      <h3 className="font-display text-sm font-semibold text-neutral-950">{item.title}</h3>
-                      <span className="text-xs font-medium uppercase tracking-wide text-neutral-500">
+                      <h3 className="font-display text-sm font-semibold text-slate-950">{item.title}</h3>
+                      <span className="text-xs font-medium uppercase tracking-wide text-slate-500">
                         {item.period}
                       </span>
                     </div>
-                    <p className="text-xs text-neutral-500">{item.org}</p>
-                    <p className="mt-1.5 text-sm leading-relaxed text-neutral-700">{item.description}</p>
+                    <p className="text-xs text-slate-500">{item.org}</p>
+                    <p className="mt-1.5 text-sm leading-relaxed text-slate-700">{item.description}</p>
                   </div>
                 ))}
               </div>
             </section>
 
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">
                 Selected Projects
               </h2>
               <div className="mt-4 space-y-5">
                 {featuredProjects.map((project) => (
                   <div key={project.id}>
-                    <h3 className="font-display text-sm font-semibold text-neutral-950">
+                    <h3 className="font-display text-sm font-semibold text-slate-950">
                       {project.name}
-                      {project.tagline && <span className="font-normal text-neutral-500"> — {project.tagline}</span>}
+                      {project.tagline && <span className="font-normal text-slate-500"> — {project.tagline}</span>}
                     </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-neutral-700">{project.description}</p>
-                    <p className="mt-1.5 text-xs text-neutral-500">{project.tags.join(" · ")}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-slate-700">{project.description}</p>
+                    <p className="mt-1.5 text-xs text-slate-500">{project.tags.join(" · ")}</p>
                   </div>
                 ))}
               </div>
@@ -129,42 +129,42 @@ export default function Resume() {
 
           <div className="space-y-8">
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">Skills</h2>
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">Skills</h2>
               <div className="mt-3 space-y-4">
                 {skillGroups.map((group) => (
                   <div key={group.category}>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                       {group.category}
                     </p>
-                    <p className="mt-1 text-sm text-neutral-700">{group.skills.join(", ")}</p>
+                    <p className="mt-1 text-sm text-slate-700">{group.skills.join(", ")}</p>
                   </div>
                 ))}
               </div>
             </section>
 
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">
                 Education
               </h2>
-              <p className="mt-3 text-sm font-semibold text-neutral-950">
+              <p className="mt-3 text-sm font-semibold text-slate-950">
                 BSc, Mining &amp; Mineral Processing Engineering
               </p>
-              <p className="mt-1 text-sm text-neutral-700">
+              <p className="mt-1 text-sm text-slate-700">
                 Jomo Kenyatta University of Agriculture and Technology (JKUAT)
               </p>
             </section>
 
             <section>
-              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">Links</h2>
+              <h2 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-yellow-700">Links</h2>
               <div className="mt-3 space-y-2 text-sm">
-                <a href="/" className="block text-emerald-700 hover:underline">
+                <a href="/" className="block text-yellow-700 hover:underline">
                   Portfolio
                 </a>
                 <a
                   href={profile.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-emerald-700 hover:underline"
+                  className="block text-yellow-700 hover:underline"
                 >
                   GitHub
                 </a>
@@ -172,7 +172,7 @@ export default function Resume() {
                   href={profile.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-emerald-700 hover:underline"
+                  className="block text-yellow-700 hover:underline"
                 >
                   LinkedIn
                 </a>

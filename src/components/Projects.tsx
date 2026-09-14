@@ -49,7 +49,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="border-t border-neutral-200 px-6 py-24 dark:border-neutral-900">
+    <section id="projects" className="border-t border-slate-200 px-6 py-24 dark:border-slate-900">
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
@@ -67,8 +67,8 @@ export default function Projects() {
                 onClick={() => setFilter(null)}
                 className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                   filter === null
-                    ? "bg-emerald-500 text-neutral-950"
-                    : "border border-neutral-300 text-neutral-600 hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-400"
+                    ? "bg-yellow-600 text-slate-950"
+                    : "border border-slate-300 text-slate-600 hover:border-slate-400 dark:border-slate-700 dark:text-slate-400"
                 }`}
               >
                 All
@@ -80,8 +80,8 @@ export default function Projects() {
                   onClick={() => setFilter(tag)}
                   className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                     filter === tag
-                      ? "bg-emerald-500 text-neutral-950"
-                      : "border border-neutral-300 text-neutral-600 hover:border-neutral-400 dark:border-neutral-700 dark:text-neutral-400"
+                      ? "bg-yellow-600 text-slate-950"
+                      : "border border-slate-300 text-slate-600 hover:border-slate-400 dark:border-slate-700 dark:text-slate-400"
                   }`}
                 >
                   {tag}
