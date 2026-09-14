@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useSiteData } from "../context/SiteDataContext";
 
-const MS_PER_CHAR = 24;
-const PAUSE_AFTER_TYPING_MS = 700;
-const BRAND_HOLD_MS = 1800;
-const FOUNDER_HOLD_MS = 2400;
+const MS_PER_CHAR = 34;
+const PAUSE_AFTER_TYPING_MS = 900;
+const BRAND_HOLD_MS = 2400;
+const FOUNDER_HOLD_MS = 3000;
 
+// Plain strings, parsed for light "syntax" coloring in renderTypedLine below
+// ("$ " = prompt, "✓" = success, "STATUS" = final status).
 const LINES = [
   "$ whoami",
   "Stackfen — Software Engineering Company",
@@ -24,9 +26,49 @@ const LINES = [
 const FULL_SCRIPT = LINES.join("\n");
 
 type Phase = "typing" | "brand" | "founder" | "done";
+const PHASES: Phase[] = ["typing", "brand", "founder"];
+
+const blurReveal = {
+  initial: { opacity: 0, y: 20, filter: "blur(10px)" },
+  animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+  exit: { opacity: 0, y: -12, filter: "blur(8px)" },
+};
 
 interface IntroAnimationProps {
   onComplete: () => void;
+}
+
+// Renders a line of the typed script with light "syntax" coloring — prompts
+// in amber, success checks in emerald, everything else neutral — rather
+// than a flat single-color terminal, which reads more like a designed
+// product moment than a generic green-on-black hacker trope.
+function renderTypedLine(line: string, key: number) {
+  if (line.startsWith("$ ")) {
+    return (
+      <div key={key}>
+        <span className="text-amber-400">$</span> <span className="text-slate-100">{line.slice(2)}</span>
+      </div>
+    );
+  }
+  if (line.startsWith("✓")) {
+    return (
+      <div key={key} className="text-emerald-400">
+        {line}
+      </div>
+    );
+  }
+  if (line.startsWith("STATUS")) {
+    return (
+      <div key={key} className="font-semibold text-amber-400">
+        {line}
+      </div>
+    );
+  }
+  return (
+    <div key={key} className="text-slate-400">
+      {line || " "}
+    </div>
+  );
 }
 
 export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
@@ -73,52 +115,75 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
 
   if (reduceMotion) return null;
 
+  const phaseIndex = PHASES.indexOf(phase);
+
   return (
     <AnimatePresence>
       {phase !== "done" && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950 px-6"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-slate-950 px-6"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
         >
+          {/* Ambient glow — same visual language as the Hero's orbs, so the
+              intro feels like part of the same brand rather than a bolted-on
+              splash screen. */}
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-amber-600/20 blur-[120px]"
+            animate={{ y: [0, 24, 0], x: [0, -16, 0] }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute bottom-[-10%] left-[-8%] h-[360px] w-[360px] rounded-full bg-amber-500/10 blur-[110px]"
+            animate={{ y: [0, -20, 0], x: [0, 14, 0] }}
+            transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+          />
+
           <button
             type="button"
             onClick={onComplete}
-            className="absolute right-6 top-6 text-xs font-medium text-slate-500 transition-colors hover:text-slate-300"
+            className="absolute right-6 top-6 z-10 text-xs font-medium text-slate-500 transition-colors hover:text-slate-300"
           >
             Skip intro →
           </button>
+
+          {/* Progress dots */}
+          <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+            {PHASES.map((p, i) => (
+              <span
+                key={p}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === phaseIndex ? "w-6 bg-amber-400" : "w-1.5 bg-slate-700"
+                }`}
+              />
+            ))}
+          </div>
 
           <AnimatePresence mode="wait">
             {phase === "typing" && (
               <motion.div
                 key="terminal"
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.3 }}
-                className="w-full max-w-lg overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl"
+                {...blurReveal}
+                transition={{ duration: 0.4 }}
+                className="relative z-10 w-full max-w-lg overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900/70 shadow-2xl backdrop-blur-xl"
               >
-                <div className="flex items-center gap-1.5 border-b border-slate-800 bg-slate-800/60 px-4 py-2.5">
+                <div className="flex items-center gap-1.5 border-b border-slate-800/80 bg-slate-800/40 px-4 py-2.5">
                   <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
                   <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
                   <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
                   <span className="ml-2 text-[10px] text-slate-500">stackfen — zsh</span>
                 </div>
-                <pre className="min-h-[220px] whitespace-pre-wrap break-words p-5 font-mono text-[13px] leading-relaxed text-emerald-400 sm:text-sm">
-                  {typed}
-                  <span className="animate-pulse">▍</span>
-                </pre>
+                <div className="min-h-[220px] p-5 font-mono text-[13px] leading-relaxed sm:text-sm">
+                  {typed.split("\n").map((line, i) => renderTypedLine(line, i))}
+                  <span className="inline-block h-4 w-[7px] translate-y-0.5 animate-pulse bg-amber-400" />
+                </div>
               </motion.div>
             )}
 
             {phase === "brand" && (
-              <motion.div
-                key="brand"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className="text-center"
-              >
+              <motion.div key="brand" {...blurReveal} transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }} className="relative z-10 text-center">
                 <p className="mb-4 font-display text-xs font-semibold uppercase tracking-[0.3em] text-amber-400">
                   Introducing
                 </p>
@@ -134,17 +199,19 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
             {phase === "founder" && (
               <motion.div
                 key="founder"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
-                className="flex flex-col items-center text-center"
+                {...blurReveal}
+                transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+                className="relative z-10 flex flex-col items-center text-center"
               >
-                <img
-                  src="/founder-photo.webp"
-                  alt=""
-                  className="h-28 w-28 rounded-full border-2 border-amber-500/40 object-cover shadow-lg sm:h-32 sm:w-32"
-                />
-                <p className="mt-5 font-display text-2xl font-bold text-slate-50 sm:text-3xl">{profile.name}</p>
+                <div className="relative">
+                  <div className="absolute inset-0 -z-10 scale-110 rounded-[2rem] bg-amber-500/20 blur-2xl" />
+                  <img
+                    src="/founder-photo.webp"
+                    alt=""
+                    className="h-64 w-64 rounded-[2rem] border border-amber-500/30 object-cover shadow-2xl sm:h-80 sm:w-80"
+                  />
+                </div>
+                <p className="mt-6 font-display text-2xl font-bold text-slate-50 sm:text-3xl">{profile.name}</p>
                 <p className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">Founder</p>
               </motion.div>
             )}
