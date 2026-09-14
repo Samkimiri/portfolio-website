@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Services from "./components/Services";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
@@ -11,6 +12,7 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AdminApp from "./admin/AdminApp";
 import Resume from "./components/Resume";
+import Portfolio from "./components/Portfolio";
 import NotFound from "./components/NotFound";
 import { SiteDataProvider } from "./context/SiteDataContext";
 import { trackPageView } from "./lib/trackView";
@@ -25,6 +27,7 @@ function MainSite() {
       <Navbar />
       <main>
         <Hero />
+        <Services />
         <About />
         <Skills />
         <Projects />
@@ -42,6 +45,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MainSite />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/admin/*" element={<AdminApp />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -53,7 +53,7 @@ export default function Projects() {
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
-            eyebrow="03 · Projects"
+            eyebrow="04 · Projects"
             title="Projects"
             description="Products I've built and shipped for real users, not demos."
           />

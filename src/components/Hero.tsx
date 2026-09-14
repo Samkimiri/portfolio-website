@@ -99,7 +99,7 @@ export default function Hero() {
             href="#contact"
             className="inline-flex items-center rounded-full border border-slate-300 px-6 py-3 text-sm font-medium text-slate-800 transition-colors hover:border-amber-600/50 hover:text-amber-700 dark:border-slate-700 dark:text-slate-200 dark:hover:border-amber-400/50 dark:hover:text-amber-400"
           >
-            Contact Me
+            Start a Project
           </motion.a>
         </motion.div>
 

@@ -10,7 +10,7 @@ export default function Skills() {
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
-            eyebrow="02 · Skills"
+            eyebrow="03 · Skills"
             title="Skills"
             description="What I build with, and what I'm building toward."
           />

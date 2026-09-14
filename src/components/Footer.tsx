@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useSiteData } from "../context/SiteDataContext";
 
 export default function Footer() {
@@ -16,6 +17,9 @@ export default function Footer() {
           © {year} {profile.brandName}. All rights reserved.
         </p>
         <div className="flex gap-6">
+          <Link to="/portfolio" className="transition-colors hover:text-amber-700 dark:hover:text-amber-400">
+            Portfolio
+          </Link>
           <a
             href={profile.social.github}
             target="_blank"

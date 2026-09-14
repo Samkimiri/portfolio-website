@@ -9,7 +9,7 @@ export default function Experience() {
       <div className="mx-auto max-w-5xl">
         <Reveal>
           <SectionHeading
-            eyebrow="04 · Experience"
+            eyebrow="05 · Experience"
             title="Experience"
             description="From engineering to shipping software."
           />
