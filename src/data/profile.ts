@@ -8,9 +8,9 @@ export const profile: Profile = {
     "Software Engineer building production-grade web applications, APIs, fintech platforms, marketplaces, and AI-powered systems for real-world problems across Africa.",
   location: "Nairobi, Kenya",
   brandName: "Stackfen",
-  brandTagline: "Software Engineering Studio",
+  brandTagline: "Software Engineering Company",
   about: [
-    "Stackfen is the engineering studio through which I design and ship software — currently a practice of one, built to grow.",
+    "Stackfen is the engineering company through which I design and ship software — currently a practice of one, built to grow.",
     "I started in mining and mineral processing engineering — a BSc from JKUAT that taught me to reason about systems, constraints, and failure modes before writing a line of code. I've carried that discipline straight into software.",
     "Today I build fullstack products, mostly fintech and AI-driven tools aimed at real markets rather than demos. Under Imara Capital I'm building microloan and AI lending infrastructure for informal-sector traders in Kenya. Alongside that, I run Sam Creative Design School (SCDS), an online creative and technical training institution where I've also taught, and Sam Creative Graphics, a brand design agency.",
     "What I care about is shipping things people actually use: payments that clear, dashboards that hold up under real data, and interfaces that don't fall over on a mid-range Android phone on a patchy connection.",
