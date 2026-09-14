@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useSiteData } from "../context/SiteDataContext";
 
-const MS_PER_CHAR = 12;
-const PAUSE_AFTER_TYPING_MS = 500;
-const REVEAL_HOLD_MS = 1400;
+const MS_PER_CHAR = 24;
+const PAUSE_AFTER_TYPING_MS = 700;
+const BRAND_HOLD_MS = 1800;
+const FOUNDER_HOLD_MS = 2400;
 
 const LINES = [
   "$ whoami",
@@ -21,13 +23,14 @@ const LINES = [
 
 const FULL_SCRIPT = LINES.join("\n");
 
-type Phase = "typing" | "revealing" | "done";
+type Phase = "typing" | "brand" | "founder" | "done";
 
 interface IntroAnimationProps {
   onComplete: () => void;
 }
 
 export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
+  const { profile } = useSiteData();
   const reduceMotion = useReducedMotion();
   const [typed, setTyped] = useState("");
   const [phase, setPhase] = useState<Phase>("typing");
@@ -44,7 +47,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
       setTyped(FULL_SCRIPT.slice(0, index));
       if (index >= FULL_SCRIPT.length) {
         clearInterval(interval);
-        setTimeout(() => setPhase("revealing"), PAUSE_AFTER_TYPING_MS);
+        setTimeout(() => setPhase("brand"), PAUSE_AFTER_TYPING_MS);
       }
     }, MS_PER_CHAR);
 
@@ -54,9 +57,14 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
   }, []);
 
   useEffect(() => {
-    if (phase !== "revealing") return;
-    const timeout = setTimeout(() => setPhase("done"), REVEAL_HOLD_MS);
-    return () => clearTimeout(timeout);
+    if (phase === "brand") {
+      const timeout = setTimeout(() => setPhase("founder"), BRAND_HOLD_MS);
+      return () => clearTimeout(timeout);
+    }
+    if (phase === "founder") {
+      const timeout = setTimeout(() => setPhase("done"), FOUNDER_HOLD_MS);
+      return () => clearTimeout(timeout);
+    }
   }, [phase]);
 
   useEffect(() => {
@@ -82,7 +90,7 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
           </button>
 
           <AnimatePresence mode="wait">
-            {phase === "typing" ? (
+            {phase === "typing" && (
               <motion.div
                 key="terminal"
                 exit={{ opacity: 0, scale: 0.98 }}
@@ -100,11 +108,14 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                   <span className="animate-pulse">▍</span>
                 </pre>
               </motion.div>
-            ) : (
+            )}
+
+            {phase === "brand" && (
               <motion.div
-                key="reveal"
+                key="brand"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
                 className="text-center"
               >
@@ -117,6 +128,24 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                 <p className="mt-4 text-base text-slate-400 sm:text-lg">
                   Your go-to software engineering company.
                 </p>
+              </motion.div>
+            )}
+
+            {phase === "founder" && (
+              <motion.div
+                key="founder"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
+                className="flex flex-col items-center text-center"
+              >
+                <img
+                  src="/founder-photo.webp"
+                  alt=""
+                  className="h-28 w-28 rounded-full border-2 border-amber-500/40 object-cover shadow-lg sm:h-32 sm:w-32"
+                />
+                <p className="mt-5 font-display text-2xl font-bold text-slate-50 sm:text-3xl">{profile.name}</p>
+                <p className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">Founder</p>
               </motion.div>
             )}
           </AnimatePresence>
