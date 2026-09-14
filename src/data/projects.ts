@@ -6,18 +6,6 @@ import type { Project } from "../types";
 // truth and this file stops being read — edit content there instead.
 export const projects: Project[] = [
   {
-    id: "amani",
-    name: "Amani",
-    tagline: "Sermon notes and Scripture, together, offline-first",
-    description:
-      "Amani helps Christians take sermon notes without losing the thread of the service, and read Scripture without needing a connection. Type a shorthand reference like \"2 Cor 5:7\" to insert the full verse instantly, backed by a complete offline KJV Bible — all 66 books, ~31,000 verses — bundled for zero-connectivity use. Notes support inline photos and share as a styled verse-card image, PDF, or plain text.",
-    tags: ["React Native", "Expo", "TypeScript", "Offline-first", "In development"],
-    liveUrl: "https://amani-app.vercel.app/",
-    repoUrl: null,
-    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/amani-cover.webp",
-    accent: "sky",
-  },
-  {
     id: "renziy",
     name: "Renziy",
     tagline: "Rent, managed.",
@@ -28,31 +16,6 @@ export const projects: Project[] = [
     repoUrl: null,
     screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/renziy-cover.webp",
     accent: "emerald",
-  },
-  {
-    id: "imara-finance-ai",
-    name: "Imara Finance AI",
-    tagline: "AI lending, responsibly.",
-    description:
-      "A responsible microloan platform built for informal-sector traders in Kenya, part of Imara Capital's AI Pride Ecosystem — a multi-agent AI lending framework. Includes an interactive analytics dashboard for tracking loan and portfolio performance.",
-    tags: ["Fintech", "Multi-agent AI", "React", "Supabase"],
-    liveUrl: "https://imara-finance-ai.vercel.app/",
-    repoUrl: null,
-    screenshot:
-      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/imara-finance-ai-cover.webp",
-    accent: "sky",
-  },
-  {
-    id: "paytrack",
-    name: "PayTrack",
-    tagline: "Payments, tracked.",
-    description:
-      "A unified payment-tracking application serving two businesses — Sam Creative Design School and Sam Creative Graphics — from a single interface, while keeping each business's financial records and audit logs separate. Built with a fintech-grade UI.",
-    tags: ["React", "Tailwind CSS", "Supabase", "Vercel"],
-    liveUrl: "https://paytrack-gold.vercel.app/",
-    repoUrl: null,
-    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/paytrack-cover.webp",
-    accent: "violet",
   },
   {
     id: "scds-learning-platform",
@@ -79,6 +42,43 @@ export const projects: Project[] = [
     screenshot:
       "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/scds-volunteer-registration-cover.webp",
     accent: "emerald",
+  },
+  {
+    id: "amani",
+    name: "Amani",
+    tagline: "Sermon notes and Scripture, together, offline-first",
+    description:
+      "Amani helps Christians take sermon notes without losing the thread of the service, and read Scripture without needing a connection. Type a shorthand reference like \"2 Cor 5:7\" to insert the full verse instantly, backed by a complete offline KJV Bible — all 66 books, ~31,000 verses — bundled for zero-connectivity use. Notes support inline photos and share as a styled verse-card image, PDF, or plain text.",
+    tags: ["React Native", "Expo", "TypeScript", "Offline-first", "In development"],
+    liveUrl: "https://amani-app.vercel.app/",
+    repoUrl: null,
+    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/amani-cover.webp",
+    accent: "sky",
+  },
+  {
+    id: "imara-finance-ai",
+    name: "Imara Finance AI",
+    tagline: "AI lending, responsibly.",
+    description:
+      "A responsible microloan platform built for informal-sector traders in Kenya, part of Imara Capital's AI Pride Ecosystem — a multi-agent AI lending framework. Includes an interactive analytics dashboard for tracking loan and portfolio performance.",
+    tags: ["Fintech", "Multi-agent AI", "React", "Supabase"],
+    liveUrl: "https://imara-finance-ai.vercel.app/",
+    repoUrl: null,
+    screenshot:
+      "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/imara-finance-ai-cover.webp",
+    accent: "sky",
+  },
+  {
+    id: "paytrack",
+    name: "PayTrack",
+    tagline: "Payments, tracked.",
+    description:
+      "A unified payment-tracking application serving two businesses — Sam Creative Design School and Sam Creative Graphics — from a single interface, while keeping each business's financial records and audit logs separate. Built with a fintech-grade UI.",
+    tags: ["React", "Tailwind CSS", "Supabase", "Vercel"],
+    liveUrl: "https://paytrack-gold.vercel.app/",
+    repoUrl: null,
+    screenshot: "https://vhhfxcibpqjbulxohcxv.supabase.co/storage/v1/object/public/project-screenshots/paytrack-cover.webp",
+    accent: "violet",
   },
   {
     id: "sam-creative-graphics",
