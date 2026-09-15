@@ -8,14 +8,16 @@ import SkillsEditor from "./SkillsEditor";
 import ExperienceEditor from "./ExperienceEditor";
 import ProjectsEditor from "./ProjectsEditor";
 import TestimonialsEditor from "./TestimonialsEditor";
+import PartnersEditor from "./PartnersEditor";
 import MessagesEditor from "./MessagesEditor";
 import AnalyticsTab from "./AnalyticsTab";
 
-type Tab = "profile" | "skills" | "experience" | "projects" | "testimonials" | "messages" | "analytics";
+type Tab = "profile" | "skills" | "experience" | "projects" | "testimonials" | "partners" | "messages" | "analytics";
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "projects", label: "Projects" },
   { id: "testimonials", label: "Testimonials" },
+  { id: "partners", label: "Partners" },
   { id: "profile", label: "Profile" },
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
@@ -118,6 +120,7 @@ export default function Dashboard() {
             {tab === "experience" && <ExperienceEditor />}
             {tab === "projects" && <ProjectsEditor />}
             {tab === "testimonials" && <TestimonialsEditor />}
+            {tab === "partners" && <PartnersEditor />}
           </>
         )}
       </div>

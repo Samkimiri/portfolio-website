@@ -4,8 +4,9 @@ import { skillGroups as staticSkills } from "../data/skills";
 import { experience as staticExperience } from "../data/experience";
 import { projects as staticProjects } from "../data/projects";
 import { testimonials as staticTestimonials } from "../data/testimonials";
+import { partners as staticPartners } from "../data/partners";
 import { fetchSiteContent, type SiteContent, type SiteContentKey } from "../lib/siteContent";
-import type { ExperienceItem, Profile, Project, SkillGroup, Testimonial } from "../types";
+import type { ExperienceItem, Partner, Profile, Project, SkillGroup, Testimonial } from "../types";
 
 interface SiteDataValue {
   profile: Profile;
@@ -13,6 +14,7 @@ interface SiteDataValue {
   experience: ExperienceItem[];
   projects: Project[];
   testimonials: Testimonial[];
+  partners: Partner[];
   loading: boolean;
   // Real fetch failures only (network/RLS/config) — not the expected "table
   // empty, using fallback" case. Keyed by section so the admin panel can
@@ -29,6 +31,7 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
   const [experience, setExperience] = useState<ExperienceItem[]>(staticExperience);
   const [projects, setProjects] = useState<Project[]>(staticProjects);
   const [testimonials, setTestimonials] = useState<Testimonial[]>(staticTestimonials);
+  const [partners, setPartners] = useState<Partner[]>(staticPartners);
   const [loading, setLoading] = useState(true);
   const [syncErrors, setSyncErrors] = useState<Partial<Record<SiteContentKey, string>>>({});
   const [version, setVersion] = useState(0);
@@ -41,13 +44,15 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
     async function load() {
       setLoading(true);
 
-      const [remoteProfile, remoteSkills, remoteExperience, remoteProjects, remoteTestimonials] = await Promise.all([
-        fetchSiteContent("profile"),
-        fetchSiteContent("skills"),
-        fetchSiteContent("experience"),
-        fetchSiteContent("projects"),
-        fetchSiteContent("testimonials"),
-      ]);
+      const [remoteProfile, remoteSkills, remoteExperience, remoteProjects, remoteTestimonials, remotePartners] =
+        await Promise.all([
+          fetchSiteContent("profile"),
+          fetchSiteContent("skills"),
+          fetchSiteContent("experience"),
+          fetchSiteContent("projects"),
+          fetchSiteContent("testimonials"),
+          fetchSiteContent("partners"),
+        ]);
 
       if (cancelled) return;
 
@@ -59,6 +64,7 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
       if (remoteExperience.data) setExperience(remoteExperience.data as SiteContent["experience"]);
       if (remoteProjects.data) setProjects(remoteProjects.data as SiteContent["projects"]);
       if (remoteTestimonials.data) setTestimonials(remoteTestimonials.data as SiteContent["testimonials"]);
+      if (remotePartners.data) setPartners(remotePartners.data as SiteContent["partners"]);
 
       const errors: Partial<Record<SiteContentKey, string>> = {};
       if (remoteProfile.error) errors.profile = remoteProfile.error;
@@ -66,6 +72,7 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
       if (remoteExperience.error) errors.experience = remoteExperience.error;
       if (remoteProjects.error) errors.projects = remoteProjects.error;
       if (remoteTestimonials.error) errors.testimonials = remoteTestimonials.error;
+      if (remotePartners.error) errors.partners = remotePartners.error;
 
       if (Object.keys(errors).length > 0) {
         console.error("Failed to sync site content from Supabase, showing fallback content:", errors);
@@ -83,8 +90,8 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
   }, [version]);
 
   const value = useMemo(
-    () => ({ profile, skillGroups, experience, projects, testimonials, loading, syncErrors, refresh }),
-    [profile, skillGroups, experience, projects, testimonials, loading, syncErrors, refresh],
+    () => ({ profile, skillGroups, experience, projects, testimonials, partners, loading, syncErrors, refresh }),
+    [profile, skillGroups, experience, projects, testimonials, partners, loading, syncErrors, refresh],
   );
 
   return <SiteDataContext.Provider value={value}>{children}</SiteDataContext.Provider>;

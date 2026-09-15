@@ -54,6 +54,15 @@ export interface ExperienceItem {
   description: string;
 }
 
+export interface Partner {
+  id: string;
+  name: string;
+  // null until an admin uploads/pastes one — the site shows an initials
+  // placeholder in the meantime rather than blocking on having a logo.
+  logo: string | null;
+  url: string | null;
+}
+
 export interface Testimonial {
   id: string;
   quote: string;
