@@ -6,11 +6,14 @@ const MS_PER_CHAR = 34;
 const PAUSE_AFTER_TYPING_MS = 900;
 const BRAND_HOLD_MS = 2400;
 const FOUNDER_HOLD_MS = 3000;
+const WELCOME_HOLD_MS = 2200;
+
+const WHO_ARE_WE_LINE = "$ who are we";
 
 // Plain strings, parsed for light "syntax" coloring in renderTypedLine below
 // ("$ " = prompt, "✓" = success, "STATUS" = final status).
 const LINES = [
-  "$ whoami",
+  WHO_ARE_WE_LINE,
   "Stackfen — Software Engineering Company",
   "",
   "$ stackfen --init",
@@ -25,8 +28,8 @@ const LINES = [
 
 const FULL_SCRIPT = LINES.join("\n");
 
-type Phase = "typing" | "brand" | "founder" | "done";
-const PHASES: Phase[] = ["typing", "brand", "founder"];
+type Phase = "typing" | "brand" | "founder" | "welcome" | "done";
+const PHASES: Phase[] = ["typing", "brand", "founder", "welcome"];
 
 const blurReveal = {
   initial: { opacity: 0, y: 20, filter: "blur(10px)" },
@@ -43,6 +46,15 @@ interface IntroAnimationProps {
 // than a flat single-color terminal, which reads more like a designed
 // product moment than a generic green-on-black hacker trope.
 function renderTypedLine(line: string, key: number) {
+  // The opening question gets real visual weight — it's the whole premise
+  // of the intro, not just another terminal command.
+  if (WHO_ARE_WE_LINE.startsWith(line) && line.length > 2) {
+    return (
+      <div key={key} className="mb-1 text-base font-bold tracking-tight text-slate-50 sm:text-lg">
+        <span className="text-amber-400">$</span> {line.slice(2)}
+      </div>
+    );
+  }
   if (line.startsWith("$ ")) {
     return (
       <div key={key}>
@@ -104,7 +116,11 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
       return () => clearTimeout(timeout);
     }
     if (phase === "founder") {
-      const timeout = setTimeout(() => setPhase("done"), FOUNDER_HOLD_MS);
+      const timeout = setTimeout(() => setPhase("welcome"), FOUNDER_HOLD_MS);
+      return () => clearTimeout(timeout);
+    }
+    if (phase === "welcome") {
+      const timeout = setTimeout(() => setPhase("done"), WELCOME_HOLD_MS);
       return () => clearTimeout(timeout);
     }
   }, [phase]);
@@ -213,6 +229,20 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
                 </div>
                 <p className="mt-6 font-display text-2xl font-bold text-slate-50 sm:text-3xl">{profile.name}</p>
                 <p className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-amber-400">Founder</p>
+              </motion.div>
+            )}
+
+            {phase === "welcome" && (
+              <motion.div
+                key="welcome"
+                {...blurReveal}
+                transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+                className="relative z-10 text-center"
+              >
+                <h2 className="font-display text-4xl font-bold tracking-tight text-slate-50 sm:text-6xl">
+                  Welcome to <span className="text-amber-400">Stackfen</span>.
+                </h2>
+                <p className="mt-4 text-base text-slate-400 sm:text-lg">Let&apos;s build something exceptional.</p>
               </motion.div>
             )}
           </AnimatePresence>
