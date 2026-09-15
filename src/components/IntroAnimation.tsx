@@ -1,6 +1,17 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Sparkle } from "lucide-react";
 import { useSiteData } from "../context/SiteDataContext";
+
+// Scattered around the brand reveal, each twinkling on its own offset
+// timing so it reads as organic glitter rather than one synced blink.
+const SPARKLES = [
+  { top: "8%", left: "12%", size: 14, delay: 0 },
+  { top: "18%", left: "85%", size: 10, delay: 0.6 },
+  { top: "78%", left: "20%", size: 12, delay: 1.1 },
+  { top: "70%", left: "88%", size: 16, delay: 0.3 },
+  { top: "45%", left: "3%", size: 9, delay: 1.6 },
+];
 
 const MS_PER_CHAR = 34;
 const PAUSE_AFTER_TYPING_MS = 900;
@@ -200,12 +211,33 @@ export default function IntroAnimation({ onComplete }: IntroAnimationProps) {
 
             {phase === "brand" && (
               <motion.div key="brand" {...blurReveal} transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }} className="relative z-10 text-center">
+                {SPARKLES.map((s, i) => (
+                  <motion.span
+                    key={i}
+                    className="pointer-events-none absolute text-amber-300"
+                    style={{ top: s.top, left: s.left }}
+                    animate={{ opacity: [0, 1, 0], scale: [0.4, 1, 0.4] }}
+                    transition={{ duration: 1.8, repeat: Infinity, delay: s.delay, ease: "easeInOut" }}
+                  >
+                    <Sparkle size={s.size} fill="currentColor" />
+                  </motion.span>
+                ))}
+
                 <p className="mb-4 font-display text-xs font-semibold uppercase tracking-[0.3em] text-amber-400">
                   Introducing
                 </p>
-                <h1 className="bg-gradient-to-br from-slate-50 to-slate-400 bg-clip-text font-display text-5xl font-bold tracking-tight text-transparent sm:text-7xl">
-                  STACKFEN
-                </h1>
+                <img src="/logo-icon.png" alt="" className="mx-auto mb-4 h-14 w-14 rounded-xl shadow-lg" />
+                <div className="relative inline-block">
+                  <h1 className="bg-gradient-to-br from-slate-50 to-slate-400 bg-clip-text font-display text-5xl font-bold tracking-tight text-transparent sm:text-7xl">
+                    STACKFEN
+                  </h1>
+                  <h1
+                    aria-hidden
+                    className="animate-shimmer absolute inset-0 bg-clip-text font-display text-5xl font-bold tracking-tight text-transparent sm:text-7xl"
+                  >
+                    STACKFEN
+                  </h1>
+                </div>
                 <p className="mt-4 text-base text-slate-400 sm:text-lg">
                   Your go-to software engineering company.
                 </p>
