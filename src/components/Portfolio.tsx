@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Check, Link as LinkIcon, Mail } from "lucide-react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import Lenis from "lenis";
 import { useSiteData } from "../context/SiteDataContext";
 import { trackPageView } from "../lib/trackView";
 import { GithubIcon, LinkedinIcon, WhatsappIcon } from "./icons";
@@ -13,13 +15,46 @@ import Footer from "./Footer";
 // A standalone, personal-voice portfolio — separate from the Stackfen
 // company home page, meant to be shared directly (e.g. with a specific
 // client or employer) without the surrounding company framing.
+//
+// This page also carries a bit more animation polish (smooth scroll,
+// scroll-linked parallax) than the home page, deliberately — the company
+// site stays conservative for a client evaluating trust; this page is more
+// of a personal showcase, so a livelier feel is a better fit. Lenis is only
+// ever imported here (Portfolio is already a separately-loaded route), so
+// none of this adds weight to the home page.
 export default function Portfolio() {
   const { profile } = useSiteData();
   const [copied, setCopied] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const introRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: introRef,
+    offset: ["start start", "end start"],
+  });
+  const introY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const introOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.3]);
 
   useEffect(() => {
     trackPageView("/portfolio");
   }, []);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    const lenis = new Lenis({ duration: 1.1 });
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, [reduceMotion]);
 
   async function handleCopyLink() {
     try {
@@ -62,8 +97,11 @@ export default function Portfolio() {
         </div>
       </header>
 
-      <section className="px-6 pt-16 pb-8">
-        <div className="mx-auto max-w-5xl">
+      <section ref={introRef} className="px-6 pt-16 pb-8">
+        <motion.div
+          className="mx-auto max-w-5xl"
+          style={reduceMotion ? undefined : { y: introY, opacity: introOpacity }}
+        >
           <p className="mb-3 font-display text-xs font-semibold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-400">
             Portfolio
           </p>
@@ -111,7 +149,7 @@ export default function Portfolio() {
               <Mail size={20} />
             </a>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       <About variant="personal" eyebrow="01 · About" />
