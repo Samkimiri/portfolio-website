@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import IntroAnimation from "./components/IntroAnimation";
 import Services from "./components/Services";
 import About from "./components/About";
 import Projects from "./components/Projects";
@@ -22,6 +21,9 @@ const Portfolio = lazy(() => import("./components/Portfolio"));
 const NotFound = lazy(() => import("./components/NotFound"));
 const Privacy = lazy(() => import("./components/Privacy"));
 const Terms = lazy(() => import("./components/Terms"));
+// Only rendered once per session (see hasSeenIntro below) — split out so
+// repeat-session visitors never pay to parse/eval it at all.
+const IntroAnimation = lazy(() => import("./components/IntroAnimation"));
 
 function RouteFallback() {
   return (
@@ -70,7 +72,11 @@ function MainSite() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950">
-      {showIntro && <IntroAnimation onComplete={handleIntroComplete} />}
+      {showIntro && (
+        <Suspense fallback={null}>
+          <IntroAnimation onComplete={handleIntroComplete} />
+        </Suspense>
+      )}
       <Navbar />
       <main>
         <Hero />

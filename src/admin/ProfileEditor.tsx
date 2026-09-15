@@ -74,6 +74,19 @@ export default function ProfileEditor() {
           This is the name shown in the Hero, Navbar, and page title — separate from your personal name below, which
           always stays accurate on the /resume page regardless of how the site is branded.
         </p>
+        <div className="mt-4">
+          <label className={labelClasses}>Hero headline (home page, short & punchy)</label>
+          <textarea
+            className={inputClasses}
+            rows={2}
+            value={form.heroHeadline}
+            onChange={(e) => update("heroHeadline", e.target.value)}
+          />
+          <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-500">
+            One sentence, ideally under 12 words — this is what a first-time visitor reads in the Hero. The longer
+            Tagline below is used on /portfolio and /resume instead.
+          </p>
+        </div>
       </div>
 
       <div className={cardClasses}>

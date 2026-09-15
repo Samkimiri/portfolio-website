@@ -21,6 +21,9 @@ export interface Profile {
   // studio brand, regardless of how the marketing site is branded.
   brandName: string;
   brandTagline: string;
+  // Short, punchy company-voiced headline for the home page Hero — `tagline`
+  // stays long-form for the personal /portfolio and /resume pages.
+  heroHeadline: string;
   // Company-voiced About copy for the home page (no personal narrative) —
   // `about` above stays personal-voice, used only on /portfolio and /resume.
   companyAbout: string[];

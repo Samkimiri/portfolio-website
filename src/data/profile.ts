@@ -9,6 +9,7 @@ export const profile: Profile = {
   location: "Nairobi, Kenya",
   brandName: "Stackfen",
   brandTagline: "Software Engineering Company",
+  heroHeadline: "We build fintech, AI, and web products that hold up under real users.",
   companyAbout: [
     "Stackfen is a software engineering company building production-grade fintech, marketplace, and AI-driven products for the East African market — from M-Pesa-integrated platforms to multi-agent AI lending systems.",
     "We take a systems-first approach: understanding constraints and failure modes before writing a line of code, then building software that holds up under real data and real users, not demos.",

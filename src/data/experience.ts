@@ -34,10 +34,18 @@ export const experience: ExperienceItem[] = [
   },
   {
     id: "imara",
-    period: "Now",
+    period: "Ongoing",
     title: "Building fintech & AI products",
     org: "Imara Capital",
     description:
       "Currently building fintech and AI-driven products under Imara Capital, including the Imara Finance AI multi-agent lending platform.",
+  },
+  {
+    id: "stackfen",
+    period: "Now",
+    title: "Founder",
+    org: "Stackfen",
+    description:
+      "Founded Stackfen, a software engineering company building production-grade fintech, marketplace, and AI-driven products for real users, not demos.",
   },
 ];

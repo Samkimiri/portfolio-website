@@ -99,55 +99,63 @@ export default function Portfolio() {
 
       <section ref={introRef} className="px-6 pt-16 pb-8">
         <motion.div
-          className="mx-auto max-w-5xl"
+          className="mx-auto flex max-w-5xl flex-col gap-8 sm:flex-row sm:items-center"
           style={reduceMotion ? undefined : { y: introY, opacity: introOpacity }}
         >
-          <p className="mb-3 font-display text-xs font-semibold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-400">
-            Portfolio
-          </p>
-          <h1 className="font-display text-3xl font-bold tracking-tight text-slate-950 sm:text-5xl dark:text-slate-50">
-            {profile.name}
-          </h1>
-          <p className="mt-3 text-lg text-slate-600 dark:text-slate-400">{profile.role}</p>
-          <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-400">{profile.tagline}</p>
+          <img
+            src="/founder-photo.webp"
+            alt={profile.name}
+            className="h-28 w-28 shrink-0 rounded-2xl border border-slate-200 object-cover shadow-lg sm:h-36 sm:w-36 dark:border-slate-800"
+          />
 
-          <div className="mt-6 flex items-center gap-5 text-slate-500 dark:text-slate-500">
-            {profile.social.whatsapp && (
+          <div>
+            <p className="mb-3 font-display text-xs font-semibold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-400">
+              Portfolio
+            </p>
+            <h1 className="font-display text-3xl font-bold tracking-tight text-slate-950 sm:text-5xl dark:text-slate-50">
+              {profile.name}
+            </h1>
+            <p className="mt-3 text-lg text-slate-600 dark:text-slate-400">{profile.role}</p>
+            <p className="mt-4 max-w-2xl text-slate-600 dark:text-slate-400">{profile.tagline}</p>
+
+            <div className="mt-6 flex items-center gap-5 text-slate-500 dark:text-slate-500">
+              {profile.social.whatsapp && (
+                <a
+                  href={`https://wa.me/${profile.social.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  className="transition-colors hover:text-amber-700 dark:hover:text-amber-400"
+                >
+                  <WhatsappIcon size={20} />
+                </a>
+              )}
               <a
-                href={`https://wa.me/${profile.social.whatsapp}`}
+                href={profile.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="transition-colors hover:text-amber-700 dark:hover:text-amber-400"
+                aria-label="GitHub"
+                className="transition-colors hover:text-slate-900 dark:hover:text-slate-100"
               >
-                <WhatsappIcon size={20} />
+                <GithubIcon size={20} />
               </a>
-            )}
-            <a
-              href={profile.social.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="transition-colors hover:text-slate-900 dark:hover:text-slate-100"
-            >
-              <GithubIcon size={20} />
-            </a>
-            <a
-              href={profile.social.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="transition-colors hover:text-slate-900 dark:hover:text-slate-100"
-            >
-              <LinkedinIcon size={20} />
-            </a>
-            <a
-              href={`mailto:${profile.social.email}`}
-              aria-label="Email"
-              className="transition-colors hover:text-slate-900 dark:hover:text-slate-100"
-            >
-              <Mail size={20} />
-            </a>
+              <a
+                href={profile.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="transition-colors hover:text-slate-900 dark:hover:text-slate-100"
+              >
+                <LinkedinIcon size={20} />
+              </a>
+              <a
+                href={`mailto:${profile.social.email}`}
+                aria-label="Email"
+                className="transition-colors hover:text-slate-900 dark:hover:text-slate-100"
+              >
+                <Mail size={20} />
+              </a>
+            </div>
           </div>
         </motion.div>
       </section>

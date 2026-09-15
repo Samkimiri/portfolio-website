@@ -51,7 +51,10 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
 
       if (cancelled) return;
 
-      if (remoteProfile.data) setProfile(remoteProfile.data as SiteContent["profile"]);
+      // Merged (not replaced) against the static default so a profile row
+      // saved before a new field existed (e.g. heroHeadline) doesn't blank
+      // it out on the live site until an admin happens to re-save.
+      if (remoteProfile.data) setProfile({ ...staticProfile, ...(remoteProfile.data as SiteContent["profile"]) });
       if (remoteSkills.data) setSkillGroups(remoteSkills.data as SiteContent["skills"]);
       if (remoteExperience.data) setExperience(remoteExperience.data as SiteContent["experience"]);
       if (remoteProjects.data) setProjects(remoteProjects.data as SiteContent["projects"]);
